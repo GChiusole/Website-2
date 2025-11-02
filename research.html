@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Research and Publications - Gideon R. Chiusole">
+    <title>Research - Gideon R. Chiusole</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://github.com/GChiusole.png?size=32">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://github.com/GChiusole.png?size=16">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://github.com/GChiusole.png?size=180">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+</head>
+<body>
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html">Gideon R. Chiusole</a>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="research.html" class="nav-link active">Research</a>
+                <a href="teaching.html" class="nav-link">Teaching</a>
+                <a href="cv.html" class="nav-link">CV</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu" type="button">
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
+            </button>
+        </div>
+    </nav>
+
+    <main role="main">
+        <section class="page-header">
+            <div class="container">
+                <h1>Research & Publications</h1>
+                <p>Broadly speaking, my research focusses around dynamical aspects of singular stochastic partial differential equations. I work under the supervision of <a href="https://www.multiscale.systems" target="_blank">Prof. Dr. Christian Kuehn</a> at <a href="https://www.ma.tum.de/" target="_blank">TU Munich</a>.</p>
+            </div>
+        </section>
+
+        <section class="research-overview">
+            <div class="container">
+                <div class="research-areas">
+                    <h2>Research Areas</h2>
+                    <div class="research-grid">
+                        <!-- Card 1: Travelling Waves -->
+                        <div class="research-card" data-topic="travelling-waves">
+                            <div class="research-card-content">
+                                <h3 style="text-align: center;">Travelling Waves & Pattern Formation</h3>
+                                <button class="expand-btn" onclick="toggleExpand('travelling-waves')">
+                                    <span class="btn-text">Learn More</span>
+                                    <i class="fas fa-chevron-down btn-icon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Stochastic Dynamics -->
+                        <div class="research-card" data-topic="stochastic-dynamics">
+                            <div class="research-card-content">
+                                <h3 style="text-align: center;">Stochastic Dynamics</h3>
+                                <button class="expand-btn" onclick="toggleExpand('stochastic-dynamics')">
+                                    <span class="btn-text">Learn More</span>
+                                    <i class="fas fa-chevron-down btn-icon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Singular SPDEs -->
+                        <div class="research-card" data-topic="singular-spdes">
+                            <div class="research-card-content">
+                                <h3 style="text-align: center;">Singular Stochastic Partial Differential Equations</h3>
+                                <button class="expand-btn" onclick="toggleExpand('singular-spdes')">
+                                    <span class="btn-text">Learn More</span>
+                                    <i class="fas fa-chevron-down btn-icon"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expanded Content Sections -->
+                    <div class="expanded-content" id="travelling-waves-expanded">
+                        <div class="expanded-header">
+                            <h3>Travelling Waves & Stability</h3>
+                            <button class="close-btn" onclick="closeExpanded('travelling-waves')">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="expanded-body">
+                            <div class="expanded-description">
+                                <p>At its core, the field of dynamical systems is the study of mathematical objects which are subject to change over time. It is then almost ironic that the most important and well understood objects are those which do <em>not</em> change over time (fixed points, invariant manifolds, invariant measures, closed orbits, etc.) since it is those which can actually be understood. One example of such objects are patterns, of which travelling waves are the simplest kind. They occur in all kinds of systems in the natural sciences and have driven a significant part of the research in dynamical systems since <a href="https://en.wikipedia.org/wiki/John_Scott_Russell#The_wave_of_translation" target="_blank" rel="noopener noreferrer">August 1834</a>.</p>
+                            </div>
+                            <div class="expanded-explanation">
+                                <h4>About this visualization</h4>
+                                <p>This animation shows a numerical simulation of a travelling wave front in the Fisher--KPP reaction-diffusion equation
+                                $\partial_t u = \partial_{xx} u + u\,(1-u)$ on a one-dimensional domain. Originally in order to understand gene mutation spreading, it is a (simplified) model for a wide range of propagation phenomena in biology, chemistry, and physics.</p>
+                                <p>The simulation shows a travelling wave front (black in left panel) which is stationary in the comoving frame with speed $c = 2$ and a solution (blue in left panel) starting from the same initial condition plus a compactly supported perturbation (black dashed in the upper middle panel). Observe how the perturbed solution first experiences a shift (light blue in lower middle panel), approaching a translated version (red dashed in left panel) of the exact wave $\Phi(x - ct)$ and reducing the orbital $L^2$ error (top right panel). After this initial jump, the shift subsequently relaxes towards the logarithmic Bramson shift (red dashed in lower middle panel). Due to the Bramson shift, the wave keeps drifting further and further behind the exact wave, leading to a (logarithmic) increase of the energy relative to the exact wave (lower right panel).</p>
+                            </div>
+                            <div class="expanded-gif-fullwidth">
+                                <video class="expanded-figure-fullwidth lazy-video" autoplay loop muted playsinline data-src="images/FKPP_animation.mp4">
+                                    <source data-src="images/FKPP_animation.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="expanded-content" id="stochastic-dynamics-expanded">
+                        <div class="expanded-header">
+                            <h3>Stochastic Dynamics</h3>
+                            <button class="close-btn" onclick="closeExpanded('stochastic-dynamics')">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="expanded-body">
+                            <div class="expanded-description">
+                                <p>It is a fact of life that real-life systems are subject to random fluctuations. This can change the features of the system significantly. While deterministic systems follow predictable trajectories, stochastic systems exhibit random behavior that can lead to fundamentally different phenomena such as metastability, noise-induced transitions, and stochastic resonance.</p>
+                            </div>
+                            <div class="expanded-explanation">
+                                <h4>About this visualization</h4>
+                                <p>This animation shows a metastable stochastic differential equation (SDE) $\mathrm{d}X_t = b(X_t)\,\mathrm{d}t + \sigma\,\mathrm{d}W_t$ with two spatially separated wells at $x_{\pm} =(\pm 1, 0)$. The top panel shows the trajectory in the $(x,y)$ phase space overlaid on the potential landscape (colored by potential value), while the bottom panel tracks the $x$-coordinate over time with the two stable fixed points marked by dashed red lines. The right panel displays the potential along the $y=0$ axis, highlighting the double-well structure with minima at $x_{\pm} = \pm 1$. </p>
+                                <p>The system exhibits metastability: trajectories spend exponentially long periods near one stable state before randomly transitioning to the other due to large deviations in the driving noise $\mathrm{d}W_t$. The corresponding deterministic equation (i.e. with $\sigma = 0$) would not exhibit such transitions: any solution would simply converge to the bottom of one of the two wells, depending on the initial condition. </p>
+
+                                <p>Metastability is a key feature distinguishing stochastic from deterministic dynamics and is the key mechanism behind many physical and chemical processes like nucleation in supercooled liquids.</p>
+                            </div>
+                            <div class="expanded-gif-fullwidth">
+                                <video class="expanded-figure-fullwidth lazy-video" autoplay loop muted playsinline data-src="images/metastable_sde.mp4">
+                                    <source data-src="images/metastable_sde.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="expanded-content" id="singular-spdes-expanded">
+                        <div class="expanded-header">
+                            <h3>Singular Stochastic Partial Differential Equations</h3>
+                            <button class="close-btn" onclick="closeExpanded('singular-spdes')">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="expanded-body">
+                            <div class="expanded-description">
+                                <p>Singularity of SPDEs is a phenomenon that occurs in higher dimensional and non-linear SPDEs. When driven by space-time white noise, solutions to many physically relevant SPDEs do not exist in the classical sense, requiring sophisticated mathematical frameworks such as regularity structures or paracontrolled distributions to make sense of them.</p>
+                            </div>
+                            <div class="expanded-explanation">
+                                <h4>About this visualization</h4>
+                                <p>[This will be updated once the simulation has finished... so in like 3 weeks lol]</p>
+                            </div>
+                            <div class="expanded-gif-fullwidth">
+                                <img src="images/singular-spdes.png" alt="Singular SPDEs Visualization" class="expanded-figure-fullwidth">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Visualizations Section - Hidden for now
+        <section class="research-images">
+            <div class="container">
+                <h2>Research Visualizations</h2>
+                <p class="section-description">Visual representations and computational results from my research work.</p>
+                
+                <div class="images-grid" role="grid" aria-label="Research visualization gallery">
+                    <div class="image-item" role="gridcell">
+                        <div class="image-placeholder" role="img" aria-label="Placeholder for pattern formation dynamics visualization">
+                            <i class="fas fa-chart-line" aria-hidden="true"></i>
+                            <p>Pattern Formation Dynamics</p>
+                        </div>
+                        <div class="image-caption">
+                            <h4>Stochastic Pattern Evolution</h4>
+                            <p>Visualization of pattern formation in stochastic PDEs showing stability and bifurcation behavior.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="image-item" role="gridcell">
+                        <div class="image-placeholder" role="img" aria-label="Placeholder for Gaussian path structures visualization">
+                            <i class="fas fa-project-diagram" aria-hidden="true"></i>
+                            <p>Gaussian Path Structures</p>
+                        </div>
+                        <div class="image-caption">
+                            <h4>Rough Path Realizations</h4>
+                            <p>Sample paths and enhanced trajectories in the context of Gaussian rough path theory.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="image-item" role="gridcell">
+                        <div class="image-placeholder" role="img" aria-label="Placeholder for travelling wave solutions visualization">
+                            <i class="fas fa-wave-square" aria-hidden="true"></i>
+                            <p>Travelling Wave Solutions</p>
+                        </div>
+                        <div class="image-caption">
+                            <h4>Wave Propagation Analysis</h4>
+                            <p>Numerical simulations of travelling wave solutions in singular stochastic systems.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="image-item" role="gridcell">
+                        <div class="image-placeholder" role="img" aria-label="Placeholder for model space geometry visualization">
+                            <i class="fas fa-brain" aria-hidden="true"></i>
+                            <p>Model Space Geometry</p>
+                        </div>
+                        <div class="image-caption">
+                            <h4>Abstract Wiener Spaces</h4>
+                            <p>Geometric representations of model spaces and their algebraic structures.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        -->
+
+        <section class="publications">
+            <div class="container">
+                <h2>Publications</h2>
+                
+                <!-- Publication filters - Hidden for now, uncomment when you have multiple publication types
+                <div class="publication-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="journal">Journal Articles</button>
+                    <button class="filter-btn" data-filter="conference">Conference Papers</button>
+                    <button class="filter-btn" data-filter="workshop">Workshop Papers</button>
+                    <button class="filter-btn" data-filter="preprint">Preprints</button>
+                </div>
+                -->
+
+                <div class="publications-list">
+                    <div class="publication-item" data-category="preprint" id="pub-abstract-wiener-model-spaces">
+                        <div class="publication-year">2024</div>
+                        <div class="publication-content">
+                            <h3>Towards Abstract Wiener Model Spaces</h3>
+                            <p class="authors">
+                                <strong>Gideon R. Chiusole</strong>, <a href="https://page.math.tu-berlin.de/~friz/" target="_blank">Peter K. Friz</a>
+                            </p>
+                            <p class="venue">
+                                <em>arXiv preprint arXiv:2401.00169</em>, January 2024<br>
+                                <span style="color: #666; font-size: 0.95em;">Under review at <em>Probability Theory and Related Fields</em></span>
+                            </p>
+                            <p class="abstract">
+                                Abstract Wiener spaces are in many ways the decisive setting for fundamental results on Gaussian measures: large deviations (Schilder), quasi-invariance (Cameron--Martin), differential calculus (Malliavin), support description (Stroock--Varadhan), concentration of measure (Fernique), etc. Analogues of these classical results have been derived in the "enhanced" context of Gaussian rough paths and, more recently, regularity structures equipped with Gaussian models. The aim of this article is to propose a similar notion directly on this enhanced level - an <em>abstract Wiener model space</em> - that encompasses the aforementioned. More specifically, we focus here on enhanced Schilder type results, Cameron--Martin shifts and Fernique estimates, offering a somewhat unified view on results of Friz--Victoir and Hairer--Weber.
+                            </p>
+                            <div class="publication-links">
+                                <a href="https://arxiv.org/pdf/2401.00169.pdf" class="pub-link"><i class="fas fa-file-pdf"></i> PDF</a>
+                                <a href="https://arxiv.org/abs/2401.00169" class="pub-link"><i class="fas fa-external-link-alt"></i> ArXiv</a>
+                                <a href="assets/citations/chiusole-friz-2024-abstract-wiener-model-spaces.bib" class="pub-link" target="_blank"><i class="fas fa-quote-right"></i> BibTeX</a>
+                            </div>
+                            <div class="publication-status">
+                                <span class="status">Preprint</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Ongoing Projects Section - Hidden for now, uncomment when ready to add content
+        <section class="ongoing-projects">
+            <div class="container">
+                <h2>Ongoing Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3>[Project Name 1]</h3>
+                          <img src="images/travelling-waves.png" 
+                              data-gif="images/travelling-waves.gif" 
+                              alt="Travelling Waves Visualization" 
+                              class="research-figure">
+                        <div class="project-collaborators">
+                            <strong>Collaborators:</strong> [Institution 1], [Institution 2]
+                        </div>
+                    </div>
+                    <div class="project-card">
+                          <img src="images/stochastic-dynamics.png" 
+                              data-gif="images/stochastic-dynamics.gif" 
+                              alt="Stochastic Dynamics Visualization" 
+                              class="research-figure">
+                        <p>Description of the project goals, methodology, and expected outcomes.</p>
+                        <div class="project-collaborators">
+                            <strong>Collaborators:</strong> [Institution 1], [Institution 2]
+                        </div>
+                    </div>
+                          <img src="images/singular-spdes.png" 
+                              data-gif="images/singular-spdes.gif" 
+                              alt="Singular SPDEs Visualization" 
+                              class="research-figure">
+        </section>
+        -->
+
+        <section class="academic-materials">
+            <div class="container">
+                <h2>Additional Materials</h2>
+                
+                <div class="materials-grid">
+                    <div class="material-section">
+                        <h3>B.Sc. Thesis & Project</h3>
+                        <div class="material-item">
+                            <h4>B.Sc. Thesis - Abstract Wiener Spaces</h4>
+                            <p class="material-date">August 30, 2021</p>
+                            <p class="material-description">
+                                The goal of this thesis is to set up a measure theoretic and functional analytic framework for a differential and integral calculus on infinite-dimensional topological vector spaces (TVSs). In the introductory part, we make some naive approaches and immediately see why they are doomed to fail. We give further motivation from pure mathematics, physics, and financial economics.
+                            </p>
+                            <p class="material-description">
+                                In the second part, we will introduce the basic notions of measures on locally convex TVSs and consider the problem of choosing "the right" $\sigma$-algebra. We then define Gaussian measures and discuss the celebrated Theorem of Fernique and its consequences. After that we study the associated Cameron--Martin space and consider the example of the finite-dimensional real space $\mathbb{R}^n$ and the classical Wiener space. In the last part of the chapter we state and prove the Theorems of Cameron and Martin and summarize the theory in its most natural setting, separable Fréchet spaces.
+                            </p>
+                            <p class="material-description">
+                                Finally, we consider the dual viewpoint, stemming from Quantum Field Theory, in which we start from a formal density w.r.t. a (hypothetical) Lebesgue measure and subsequently develop the corresponding functional analytic framework. In the final chapter we employ parts of the theory to obtain a generalized version of the classical Theorem of Schilder from the Theory of Large Deviations.
+                            </p>
+                            <a href="assets/publications/bsc-thesis-abstract-wiener-spaces-2021.pdf" class="material-link" target="_blank"><i class="fas fa-file-pdf"></i> PDF</a>
+                        </div>
+                        
+                        <div class="material-item">
+                            <h4>Project - Fractional Brownian Motion</h4>
+                            <p class="material-date">October 26, 2021</p>
+                            <p class="material-description">
+                                Fractional Brownian motion (fBM) is a one parameter generalization of Brownian motion which can be seen as the convolution of white noise with a power kernel $t^{H - 1/2}$, splitting fBM into three quite distinct classes: $0 < H < 1/2$, $H = 1/2$, and $1/2 < H < 1$. Originally, fBM was introduced by B. Mandelbrot and J. Van Ness as a continuous time model for a long-range dependent stochastic process, specifically for the study of economics, hydraulics, and fluctuation in solids. From a probabilistic point of view, fBM is particularly interesting since it is neither a Markov process nor a semi-martingale. We will show both of these results alongside some other probabilistic and analytic properties.
+                            </p>
+                            <a href="assets/publications/project-fractional-brownian-motion-2021.pdf" class="material-link" target="_blank"><i class="fas fa-file-pdf"></i> PDF</a>
+                        </div>
+                    </div>
+
+                    <div class="material-section">
+                        <h3>Seminar Notes</h3>
+                        <div class="seminar-notes-list">
+                            <div class="seminar-note-hover">
+                                <div class="seminar-note-content">
+                                    <strong>Maximal Tori and the Classification of Rank One Compact Lie Groups</strong>
+                                    <span class="seminar-date">December 2023</span>
+                                </div>
+                                <a href="assets/seminars/maximal-tori-rank-one-lie-groups-2023.pdf" class="seminar-pdf-btn" target="_blank">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                                <div class="tooltip">The representation theory of non-commutative Lie groups is much more involved than that of commutative Lie groups. However, in the case of a compact and connected Lie group $G$, its maximal compact connected abelian subgroup (its maximal torus) contains a lot of information about $G$. Indeed, understanding the group of transformations of the torus under the action of internal symmetries (conjugations) of $G$ produces the Weyl group of $G$, which is a powerful invariant and simplifies much of the analysis of $G$. By rank of $G$ we mean the dimension of its maximal torus. While seemingly only a very crude invariant, it is enough to classify interesting examples of low dimension. One can show that any $G$ of rank $1$ is isomorphic to either $U(1)$, $SU(2)$ or $SO(3)$. As a consequence there are no compact connected Lie groups of dimension $2$, except for the torus of dimension $2$.</div>
+                            </div>
+
+                            <div class="seminar-note-hover">
+                                <div class="seminar-note-content">
+                                    <strong>Cohomology and Characteristic Classes</strong>
+                                    <span class="seminar-date">November 2022</span>
+                                </div>
+                                <a href="assets/seminars/cohomology-characteristic-classes-2022.pdf" class="seminar-pdf-btn" target="_blank">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                                <div class="tooltip">One of the most powerful techniques in modern geometry is cohomology. It allows to associate linear invariants (cohomology groups) to highly non-linear objects (here, smooth manifolds) in a systematic and homotopy invariant manner. In particular, de Rham cohomology allows to compute the cohomology groups by interpreting the geometry (or rather the homotopy type) of a manifold as an obstruction to the existence of global solutions to certain PDEs on that manifold. Together with homological algebra, the Mayer-Vietoris sequence allows to compute the cohomology of a manifold from the cohomology of a covering. Since having the same cohomology is a weaker notion than being homeomorphic, and since the dimension of the $0$-th order de Rham cohomology group $H^0_{dR}(M)$ equals the number of connected components of the manifold, de Rham cohomology can be applied to extensions of the Jordan curve theorem, i.p. the Jordan-Brouwer separation theorem, invariance of domain, and invariance of dimension.</div>
+                            </div>
+
+                            <div class="seminar-note-hover">
+                                <div class="seminar-note-content">
+                                    <strong>Infinite Dimensional Analysis - Gaussian Random Variables</strong>
+                                    <span class="seminar-date">November 2021</span>
+                                </div>
+                                <a href="assets/seminars/infinite-analysis-gaussian-random-variables-2021.pdf" class="seminar-pdf-btn" target="_blank">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                                <div class="tooltip">Gaussian measures on infinite dimensional vector spaces tend to be singular with respect to each other. In particular, given a Gaussian measure $\mu$, there is only a very restricted subspace $H$ such that translation along elements of that subspace produces an equivalent measure (Cameron-Martin Theorem). This subspace is called the Cameron-Martin subspace, and despite the fact that the Gaussian measure assigns it $\mu(H) = 0$ mass, the Cameron-Martin subspace determines the measure uniquely. Given two Gaussian measures $\mu_1, \mu_2$, the Feldman-Hájek Theorem gives a characterization of mutual singularity or equivalence in terms of the eigenvalues of the covariance operator of the two measures. Given two sequences of equivalent Gaussian marginal distributions, the Kakutani theorem gives a criterion for the equivalence of the product measures on the product space.</div>
+                            </div>
+
+                            <div class="seminar-note-hover">
+                                <div class="seminar-note-content">
+                                    <strong>Infinite Dimensional Analysis - Gaussian Measures on Hilbert Spaces</strong>
+                                    <span class="seminar-date">November 2021</span>
+                                </div>
+                                <a href="assets/seminars/infinite-analysis-gaussian-measures-hilbert-2021.pdf" class="seminar-pdf-btn" target="_blank">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                                <div class="tooltip">In order to write down integral equations (for integral formulations of ODEs, mild solutions, action functionals, Picard iteration, etc.), one needs a reference measure. On a finite-dimensional Hilbert space $H$ there is a canonical choice for this: the Lebesgue measure. However, in the infinite-dimensional case, one can show that any measure that could reasonably be called 'Lebesgue measure' cannot exist. This makes it necessary to construct more subtle methods to deal with the measures encountered, with the most common and also most important case being Gaussian measures. The generalization of Gaussian measures from Euclidean space $\mathbb{R}^n$ to general Hilbert spaces brings some functional analytic subtleties with it e.g. the definition of Gaussianity without resorting to a density (which would necessarily have to involve the non-existent Lebesgue measure), the choice of $\sigma$-algebra on which the measure is defined, the covariance form/operator, generalizations to more general topological vector spaces, etc.</div>
+                            </div>
+
+                            <div class="seminar-note-hover">
+                                <div class="seminar-note-content">
+                                    <strong>Pathwise Stochastic Integrals for Model Free Finance</strong>
+                                    <span class="seminar-date">June 2021</span>
+                                </div>
+                                <a href="assets/seminars/pathwise-stochastic-integrals-finance-2021.pdf" class="seminar-pdf-btn" target="_blank">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                                <div class="tooltip">In order to price an option, one would usually proceed as follows: 1. Select a class of models suitable for the problem, 2. Calibrate the model using market data, 3. Compute the price as the discounted expectation with respect to the calibrated model. However, there is a problem with this approach: for complicated options, different models may produce different prices. Model-free finance seeks to solve this problem by not choosing a probabilistic model in the first place. However, this brings some substantial problems with it; for example, what do an SDE and its solution even mean if there is no underlying semi-martingale measure? and what are arbitrage and no-free-lunch, which are fundamentally stochastic notions? Solutions to these problems are given by the notions of model-free Itô isometry and rough paths, as well as typical price paths and model-free arbitrage opportunities.</div>
+                            </div>
+
+                            <div class="seminar-note-hover">
+                                <div class="seminar-note-content">
+                                    <strong>Mathematical Quantum Mechanics - Complete Positivity & Stinespring Theorem</strong>
+                                    <span class="seminar-date">June 2021</span>
+                                </div>
+                                <a href="assets/seminars/quantum-mechanics-complete-positivity-stinespring-2021.pdf" class="seminar-pdf-btn" target="_blank">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                                <div class="tooltip">For a closed quantum system, time evolution in the Heisenberg picture is given by a unitary transformation of the observable by the time evolution operator $U(t) = e^{-iHt/\hbar}$, which is itself induced by the Hamiltonian $H$ of the system and the Schrödinger equation. However, in Quantum Information Theory, when considering open systems with possible entanglement, a more general notion of time evolution is needed. In the Schrödinger picture, this is the notion of a quantum channel, in the Heisenberg picture it is that of completely positive maps between operator algebras. Essentially, a time evolution should not only map states to states of an isolated system but also states to states when the system is paired with an auxiliary system on which no action is performed. Mathematically speaking, not only $T$ should be a positive map, but also $T \otimes \text{Id}$ for any identity operator. For finite dimensional state spaces, the Choi–Jamiołkowski isomorphism gives the channel-state duality, relating complete positivity to positivity of a certain state: the Choi matrix. However, in infinite dimension this fails. The Stinespring Dilation Theorem gives a characterization of completely positive linear maps as $*$-representations followed by conjugation by some linear map.</div>
+                            </div>
+
+                            <div class="seminar-note-hover">
+                                <div class="seminar-note-content">
+                                    <strong>Category Theory - Kan Extensions</strong>
+                                    <span class="seminar-date">December 2019</span>
+                                </div>
+                                <a href="assets/seminars/category-theory-kan-extensions-2019.pdf" class="seminar-pdf-btn" target="_blank">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                                <div class="tooltip">Left/Right Kan extensions concern the (universal) existence of extensions of a functor $F: \mathcal{C} \to \mathcal{E}$ to a functor on a larger domain $\mathcal{D}$ along a functor $K:\mathcal{C} \to \mathcal{D}$ i.e. a functor $L: \mathcal{D} \to \mathcal{E}$ s.t. the resulting diagram commutes. We first introduce left/right Kan extensions as initial/terminal objects in appropriate comma categories and then give another characterization in terms of left/right adjoint to a precomposition-functor $K^*$ between functor categories $[\mathcal{D},\mathcal{E}]$ and $[\mathcal{C},\mathcal{E}]$. Furthermore, we give a concrete construction for the Kan Extensions for sufficiently complete categories. We also consider concrete examples of extending inclusions of posets, extending exponential functions from $\mathbb{Q}$ to $\mathbb{R}$, and induced group representations.</div>
+                            </div>
+
+                            <div class="seminar-note-hover">
+                                <div class="seminar-note-content">
+                                    <strong>Category Theory - Commutativity of Limits</strong>
+                                    <span class="seminar-date">November 2019</span>
+                                </div>
+                                <a href="assets/seminars/category-theory-commutativity-limits-2019.pdf" class="seminar-pdf-btn" target="_blank">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                                <div class="tooltip">Let $X: I \to \mathcal{C}$ be a diagram. A limit of this diagram is a representing object of the set valued functor $\text{Nat}(\Delta(-),X)$, which assigns to an object $A$ in $\mathcal{C}$ the cone associated to $A$ and the diagram. We consider sufficient and necessary conditions under which limits and colimits with small index category commute. We also consider some examples. A concrete example is the question 'Is the pushout of cokernels uniquely isomorphic to the cokernel of pushouts?'</div>
+                            </div>
+
+                            <div class="seminar-note-hover">
+                                <div class="seminar-note-content">
+                                    <strong>Darstellungstheorie endlicher Gruppen - Tensor Produkte von FG-Moduln und der Darstellungsring</strong>
+                                    <span class="seminar-date">July 2019</span>
+                                </div>
+                                <a href="assets/seminars/group-representation-tensor-products-2019.pdf" class="seminar-pdf-btn" target="_blank">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                                <div class="tooltip">Unter den Voraussetzungen des Satzes von Maschke ist jeder $FG$-Modul eine direkte Summe aus irreduziblen Moduln. Es ist also natürlich nach Methoden zu suchen, mit welchen man aus zwei $FG$-Moduln einen neuen produziert. Eine dieser ist die direkte Summe $M \oplus N$, eine andere das Tensorprodukt $M \otimes N$. Wir führen das Tensorprodukt mittels seiner universellen Eigenschaft, als Faktorraum, sowie auch mit einer expliziten Basis ein. Die Charaktere der so gewonnen Darstellungen lassen sich ebenfalls schön charakterisieren. Die Menge der Darstellungen einer Gruppe bildet mit den Operationen der direkten Summe und des Tensorproduktes einen Halbring. Der Gruppenring ist der Ring welchen man erhält, wenn man den unterliegenden (additiven) Monoid zu einer Gruppe vervollständigt. Das geschieht mittels Grothendieck-Konstruktion.</div>
+                            </div>
+
+                            <div class="seminar-note-hover">
+                                <div class="seminar-note-content">
+                                    <strong>Darstellungstheorie endlicher Gruppen - Charaktere</strong>
+                                    <span class="seminar-date">June 2019</span>
+                                </div>
+                                <a href="assets/seminars/group-representation-charaktere-2019.pdf" class="seminar-pdf-btn" target="_blank">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                                <div class="tooltip">Hat der für die Darstellung $\rho: G \to GL(V)$ verwendete Vektorraum $V$ endliche Dimension, so lässt sich die Spur $\text{tr}(\rho(g))$ der Darstellung eines bestimmten Elements $g \in G$ in der Gruppe bilden. Die Funktion $\chi: G \to \mathbb{C}$, welche einem Element der Gruppe diese Spur zuweist nennt man Charakter dieser Darstellung: $\chi(g) = \text{tr}(\rho(g))$. Durch Übergang von Darstellung auf Charakter der Darstellung geht zunächst scheinbar sehr viel Information verloren, aber es stellt sich heraus dass viele Eigenschaften der Darstellung wiederhergestellt werden kann. Wir führen den Charakter einer linearen Darstellung ein und beweisen erste Eigenschaften. Außerdem betrachten wir die Beispiele der regulären und Permutationscharaktere.</div>
+                            </div>
+
+                            <div class="seminar-note-hover">
+                                <div class="seminar-note-content">
+                                    <strong>Topologie - Universelle Konstruktionen und topologische Basen</strong>
+                                    <span class="seminar-date">June 2019</span>
+                                </div>
+                                <a href="assets/seminars/topology-universal-constructions-bases-2019.pdf" class="seminar-pdf-btn" target="_blank">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                                <div class="tooltip">Wir führen Einbettungen und Quotientenraum als universelle Konstruktionen ein, betrachten Beispiele sowie Anwendungen. Außerdem führen wir den Begriff der Basen und Subbasen ein, beweisen erste Eigenschaften und geben Beispiele. Schlussendlich geben wir einen Beweis für die Aussage dass ein zweit-abzählbarer Raum separabel ist. Die Umkehrrichtung gilt wenn der Raum metrisierbar ist, was auch bewiesen wird.</div>
+                            </div>
+
+                            <div class="seminar-note-hover">
+                                <div class="seminar-note-content">
+                                    <strong>Darstellungstheorie endlicher Gruppen - Gruppenalgebra & Satz von Maschke</strong>
+                                    <span class="seminar-date">May 2019</span>
+                                </div>
+                                <a href="assets/seminars/gruppenalgebra-maschke-2019.pdf" class="seminar-pdf-btn" target="_blank">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                                <div class="tooltip">Eine ($F$-lineare) Darstellung einer Gruppe $G$ ist ein Homomorphismus $\rho: G \to GL(V)$ von $G$ in die Automorphismengruppe eines $F$-Vektorraumes $V$. Zu jeder solcher Darstellung lässt sich ein Modul über der sog. Gruppenalgebra $F[G]$ von $G$ über $F$ (den $FG$-Modul) zuordnen und vice versa. Diese Zuordnung ist funktoriell und induziert sogar einen Isomorphismus der entsprechenden Kategorien. Der Satz von Maschke gibt ein hinreichendes Kriterium dafür wann dieser $FG$-Modul halbeinfach ist. Wir führen die Gruppenalgebra ein und formulieren und beweisen den Satz von Maschke für endliche Gruppen.</div>
+                            </div>
+
+                            <div class="seminar-note-hover">
+                                <div class="seminar-note-content">
+                                    <strong>Workshop on Advances in Analysis</strong>
+                                    <span class="seminar-date">April 2019</span>
+                                </div>
+                                <a href="assets/seminars/workshop-advances-analysis-2019.pdf" class="seminar-pdf-btn" target="_blank">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                                <div class="tooltip">We show that the set of discontinuities of a monotone function $f: \mathbb{R} \to \mathbb{R}$ is countable - so i.p. of Lebesgue measure $0$. We also give a constructive proof that for any countable set $S \subset \mathbb{R}$ there exists a monotone function having exactly those points of discontinuity - it is given as a limit of indicator functions $f = \lim_{n \to \infty} \sum_{s \in S} \mathbf{1}_{[s,\infty)}$. We also characterize (generalized) inverse functions of a monotone function.</div>
+                            </div>
+
+                            <div class="seminar-note-hover">
+                                <div class="seminar-note-content">
+                                    <strong>Algebraic Geometry - Functor of Points on Schemes & Yoneda Lemma</strong>
+                                    <span class="seminar-date">November 2018</span>
+                                </div>
+                                <a href="assets/seminars/yoneda-lemma-2018.pdf" class="seminar-pdf-btn" target="_blank">
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </a>
+                                <div class="tooltip">For a general topological space $X$, a point can be characterized by a morphism from the singleton $\{*\}$ into $X$ which maps to said point. We want to take a similar approach in the study of schemes. However, of course, not any two one-pointed schemes are uniquely isomorphic - any two non-isomorphic fields give an example. Thus we need a more sophisticated notion of points: a functor $h_X$ assigning to a scheme $A$ the set of morphisms $\text{Hom}(A,X)$ from $A$ to $X$. Those should be interpreted as the $A$-points (think of a field $k$ and the associated affine scheme $\text{Spec}(k)$, which is an actual point). It turns out that the entire scheme can be recovered from this functor. This is a stronger version of the Yoneda Lemma, which is introduced in more generality.</div>
+                            </div>
+                        </div>
+                        <p class="material-note">
+                            <em>Notes for seminar (Hauptseminar) talks I gave during my studies. Hover over each title to see details.</em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Gideon Chiusole. All rights reserved.</p>
+            <p>Last updated: <span id="last-updated"></span></p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Handle MathJax rendering in tooltips
+        document.addEventListener('DOMContentLoaded', function() {
+            const seminarNotes = document.querySelectorAll('.seminar-note-hover');
+            
+            seminarNotes.forEach(note => {
+                const tooltip = note.querySelector('.tooltip');
+                if (tooltip) {
+                    let isProcessed = false;
+                    
+                    note.addEventListener('mouseenter', function() {
+                        if (!isProcessed && typeof MathJax !== 'undefined') {
+                            MathJax.typesetPromise([tooltip]).then(() => {
+                                isProcessed = true;
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

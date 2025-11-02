@@ -1,0 +1,106 @@
+# Academic Website Configuration
+# This file is used by GitHub Pages (Jekyll) for site configuration
+
+# Site settings
+title: "Gideon R. Chiusole - Academic Website"
+description: "Personal academic website of Gideon R. Chiusole, PhD student in Mathematics at TUM, researching stochastic PDEs and abstract Wiener spaces."
+author: "Gideon R. Chiusole"
+email: "g.chiusole@tum.de"
+url: "https://yourusername.github.io" # Replace with your GitHub Pages URL
+baseurl: "" # Leave empty if this is your main GitHub Pages site
+
+# Social media and academic profiles
+social:
+  email: "g.chiusole@tum.de"
+  linkedin: "gideon-chiusole-55b5b4152"
+  twitter: ""
+  github: ""
+  google_scholar: ""
+  orcid: "0009-0005-3930-2924"
+  researchgate: ""
+
+# Institution information
+institution:
+  name: "Technical University of Munich"
+  department: "Department of Mathematics, TopMath Program"
+  address: |
+    Boltzmannstraße 3
+    85748 Garching
+    Germany
+
+# SEO and metadata
+lang: "en"
+timezone: "America/New_York" # Adjust to your timezone
+
+# GitHub Pages specific settings
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - package.json
+  - package-lock.json
+  - .git
+  - .gitignore
+
+# Include files that Jekyll normally ignores
+include:
+  - _redirects
+  - .nojekyll
+
+# Markdown settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Collections (if you want to use Jekyll collections for publications)
+collections:
+  publications:
+    output: false
+  projects:
+    output: false
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: "publications"
+      type: "publications"
+    values:
+      layout: "publication"
+
+# Analytics (optional - add your tracking ID)
+google_analytics: "" # Add your GA tracking ID here
+
+# Contact form settings (if using Netlify or similar)
+contact_form:
+  action: "" # Add your form handler URL here
+  method: "POST"
+
+# Theme settings
+theme_color: "#2563eb"
+background_color: "#ffffff"
+
+# PWA settings (optional)
+pwa:
+  enabled: false # Set to true if you want PWA features
+
+# Performance settings
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  ignore:
+    envs: development

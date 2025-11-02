@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Academic website of Gideon R. Chiusole - PhD Mathematics, Stochastic PDEs Research">
+    <title>Gideon R. Chiusole - Academic Website</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://github.com/GChiusole.png?size=32">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://github.com/GChiusole.png?size=16">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://github.com/GChiusole.png?size=180">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+</head>
+<body>
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="#home">Gideon R. Chiusole</a>
+            </div>
+            <div class="nav-menu" id="nav-menu" role="menubar" aria-label="Navigation menu">
+                <a href="#home" class="nav-link" role="menuitem">Home</a>
+                <a href="research.html" class="nav-link" role="menuitem">Research</a>
+                <a href="teaching.html" class="nav-link" role="menuitem">Teaching</a>
+                <a href="cv.html" class="nav-link" role="menuitem">CV</a>
+                <a href="contact.html" class="nav-link" role="menuitem">Contact</a>
+            </div>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu" type="button">
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
+            </button>
+        </div>
+    </nav>
+
+    <main role="main">
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>Gideon R. Chiusole</h1>
+                        <p class="hero-subtitle">PhD Student in Mathematics</p>
+                        <p class="hero-affiliation">Technical University of Munich (TUM)</p>
+                        <p class="hero-description">
+                            I am a PhD student in Mathematics at <a href="https://www.ma.tum.de/" target="_blank">TU Munich</a> in the 
+                            <a href="https://www.cit.tum.de/cit/studium/studiengaenge/topmath/" target="_blank">TopMath Program</a>, working in the group for  <a href="https://www.math.cit.tum.de/math/forschung/gruppen/multiskalen-stochastische-dynamik/" target="_blank">Multiscale and Stochastic Dynamics</a> under the supervision of <a href="https://www.multiscale.systems" target="_blank">Prof. Dr. Christian Kuehn</a>. My research lies at the intersection of stochastic analysis, dynamical systems, partial differential equations, and mathematical physics. More specifically, I am interested in the stability of patterns arising in singular stochastic partial differential equations (SPDEs) and their interplay with renormalization.
+                        </p>
+                        <!-- <div class="research-interests-subtle">
+                            <p class="interests-label">Research areas:</p>
+                            <div class="interests-list">
+                                <span>Dynamical Systems</span>
+                                <span>Stochastic Analysis</span>
+                                <span>Stochastic PDEs</span>
+                                <span>Pattern Formation</span>
+                                <span>Geometric Methods</span>
+                            </div>
+                        </div> -->
+                        <div class="hero-buttons">
+                            <a href="research.html" class="btn btn-primary">View Research</a>
+                        </div>
+                        <div class="social-links">
+                            <a href="mailto:g.chiusole@tum.de" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                            <a href="https://arxiv.org/search/?query=Gideon+Chiusole&searchtype=author" aria-label="ArXiv Publications" class="arxiv-link">arXiv</a>
+                            <a href="https://www.linkedin.com/in/gideon-chiusole-55b5b4152" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://orcid.org/0009-0005-3930-2924" aria-label="ORCID"><i class="fab fa-orcid"></i></a>
+                            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="images/photo.jpg" alt="Profile photo of Gideon R. Chiusole" class="profile-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo" aria-label="Site footer">
+        <div class="container">
+            <p>&copy; 2024 Gideon R. Chiusole. All rights reserved.</p>
+            <p>Last updated: <span id="last-updated"></span></p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
