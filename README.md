@@ -1,8 +1,6 @@
-Gideon R. Chiusole - Academic Website
+### Gideon R. Chiusole - Academic Website
 
 This is the personal academic website of Gideon R. Chiusole, PhD student in Mathematics at Technical University of Munich (TUM) in the TopMath Program.
-
-Website
 
 This website is hosted using GitHub Pages and can be accessed at: https://gchiusole.github.io/Website-2/
 
