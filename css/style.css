@@ -1342,6 +1342,13 @@ h3 {
     font-size: 0.95rem;
 }
 
+/* Match 'Finished' line styling with thesis line in student cards */
+.student-finished {
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin-top: 6px;
+}
+
 .alumni-item {
     display: flex;
     justify-content: space-between;

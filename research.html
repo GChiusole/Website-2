@@ -107,7 +107,7 @@
                             </div>
                             <div class="expanded-explanation">
                                 <h4>About this visualization</h4>
-                                <p>This animation shows a numerical simulation of a travelling wave front in the Fisher--KPP reaction-diffusion equation
+                                <p>This animation shows a numerical simulation of a travelling wave front in the Fisher–KPP reaction-diffusion equation
                                 $\partial_t u = \partial_{xx} u + u\,(1-u)$ on a one-dimensional domain. Originally in order to understand gene mutation spreading, it is a (simplified) model for a wide range of propagation phenomena in biology, chemistry, and physics.</p>
                                 <p>The simulation shows a travelling wave front (black in left panel) which is stationary in the comoving frame with speed $c = 2$ and a solution (blue in left panel) starting from the same initial condition plus a compactly supported perturbation (black dashed in the upper middle panel). Observe how the perturbed solution first experiences a shift (light blue in lower middle panel), approaching a translated version (red dashed in left panel) of the exact wave $\Phi(x - ct)$ and reducing the orbital $L^2$ error (top right panel). After this initial jump, the shift subsequently relaxes towards the logarithmic Bramson shift (red dashed in lower middle panel). Due to the Bramson shift, the wave keeps drifting further and further behind the exact wave, leading to a (logarithmic) increase of the energy relative to the exact wave (lower right panel).</p>
                             </div>
@@ -129,7 +129,7 @@
                         </div>
                         <div class="expanded-body">
                             <div class="expanded-description">
-                                <p>It is a fact of life that real-life systems are subject to random fluctuations. This can change the features of the system significantly. While deterministic systems follow predictable trajectories, stochastic systems exhibit random behavior that can lead to fundamentally different phenomena such as metastability, noise-induced transitions, and stochastic resonance.</p>
+                                <p>It is a fact of life that real-world systems are subject to random fluctuations. These can arise from various sources, such as thermal noise, environmental disturbances, or inherent microscopic randomness. In any case, the behaviour of such stochastic systems can differ significantly (quantitatively and qualitatively) from their deterministic counterparts. One example of this difference is metastability: while in deterministic systems solutions that start in a neighborhood of a stable equilibrium point stay close to the equilibrium, in stochastic systems such solutions may stay close to the equilibrium for exponentially long times before spontaneously transitioning to other states due to rare noise events.</p>
                             </div>
                             <div class="expanded-explanation">
                                 <h4>About this visualization</h4>
@@ -156,15 +156,20 @@
                         </div>
                         <div class="expanded-body">
                             <div class="expanded-description">
-                                <p>Singularity of SPDEs is a phenomenon that occurs in higher dimensional and non-linear SPDEs. When driven by space-time white noise, solutions to many physically relevant SPDEs do not exist in the classical sense, requiring sophisticated mathematical frameworks such as regularity structures or paracontrolled distributions to make sense of them.</p>
+                                <p>Systems in nature are often characterised by contributions from and interactions of a wide range of spatial and temporal scales. Most observables of interest, however, are effectively coarse-grained, meaning that they only capture the large-scale behavior of the system while neglecting the small-scale details. To construct these macroscopic observables from microscopic models, one typically performs an averaging procedure over the small scales. However, this averaging procedure is often highly non-trivial, as simply "ignoring" the small scales usually leads to trivial, ill-defined or divergent objects.</p>
+
+                                <p>On the mathematical side, this problematic manifests itself in the study of SPDEs which are driven by noise that excites all spatial scales (e.g., additive space-time white noise). In such situations, solutions typically exhibit very irregular, distributional-like behavior at small scales. As a consequence, nonlinear terms appearing in the equation often become ill-defined, since classical operations like pointwise multiplication are not defined for general distributions, and counterterms must be introduced to restore a well-posed formulation.</p>
+                                    
                             </div>
                             <div class="expanded-explanation">
                                 <h4>About this visualization</h4>
-                                <p>This animation shows a numerical simulation related to a singular SPDE (ϕ⁴-type model). It illustrates typical stochastic dynamics at full frame rate without frame skipping.</p>
+                                <p>This animation shows a numerical simulation of the stochastic Allen–Cahn equation, given formally by $\partial_t u = \Delta u + u - u^3 + \xi$ on the 2D torus, where $\xi$ is space-time white noise. This equation exhibits the problematic described above: Let $\xi_\varepsilon$ denote a mollification of $\xi$ at scale $\varepsilon > 0$. Then the unrenormalized regularized approximation (middle panel), governed by $\partial_t u = \Delta u + u - u^3 + \xi_\varepsilon$, is well-defined, but describes the dynamics of the system <em>ignoring</em> scales below $\varepsilon > 0$. If we now let $\varepsilon$ go to zero, the solutions will not converge to the correct coarse-grained limit, but rather to the Gaussian free field (left panel) and thus will not form macroscopic interfaces, as should be expected from the model.</p>
+
+                               <p>However, if we properly account for the small scale averaging by adjusting the potential via a counter term, i.e., considering $\partial_t u = \Delta u + (1 + 3 C_\varepsilon) u - u^3 + \xi$, which diverges like $C_\varepsilon \sim \log(\varepsilon^{-1})$, the solutions converge to the correct macroscopic limit (right panel) and exhibit the expected interface dynamics.</p>
                             </div>
                             <div class="expanded-gif-fullwidth">
-                                <video class="expanded-figure-fullwidth lazy-video" autoplay loop muted playsinline data-src="images/Phi4_optimized.mp4">
-                                    <source data-src="images/Phi4_optimized.mp4" type="video/mp4">
+                                <video class="expanded-figure-fullwidth lazy-video" autoplay loop muted playsinline data-src="images/Allen_Cahn_optimized.mp4">
+                                    <source data-src="images/Allen_Cahn_optimized.mp4" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
                             </div>
@@ -256,7 +261,7 @@
                                 <span style="color: #666; font-size: 0.95em;">Under review at <em>Probability Theory and Related Fields</em></span>
                             </p>
                             <p class="abstract">
-                                Abstract Wiener spaces are in many ways the decisive setting for fundamental results on Gaussian measures: large deviations (Schilder), quasi-invariance (Cameron--Martin), differential calculus (Malliavin), support description (Stroock--Varadhan), concentration of measure (Fernique), etc. Analogues of these classical results have been derived in the "enhanced" context of Gaussian rough paths and, more recently, regularity structures equipped with Gaussian models. The aim of this article is to propose a similar notion directly on this enhanced level - an <em>abstract Wiener model space</em> - that encompasses the aforementioned. More specifically, we focus here on enhanced Schilder type results, Cameron--Martin shifts and Fernique estimates, offering a somewhat unified view on results of Friz--Victoir and Hairer--Weber.
+                                Abstract Wiener spaces are in many ways the decisive setting for fundamental results on Gaussian measures: large deviations (Schilder), quasi-invariance (Cameron–Martin), differential calculus (Malliavin), support description (Stroock–Varadhan), concentration of measure (Fernique), etc. Analogues of these classical results have been derived in the "enhanced" context of Gaussian rough paths and, more recently, regularity structures equipped with Gaussian models. The aim of this article is to propose a similar notion directly on this enhanced level - an <em>abstract Wiener model space</em> - that encompasses the aforementioned. More specifically, we focus here on enhanced Schilder type results, Cameron–Martin shifts and Fernique estimates, offering a somewhat unified view on results of Friz–Victoir and Hairer–Weber.
                             </p>
                             <div class="publication-links">
                                 <a href="https://arxiv.org/pdf/2401.00169.pdf" class="pub-link"><i class="fas fa-file-pdf"></i> PDF</a>
@@ -319,7 +324,7 @@
                                 The goal of this thesis is to set up a measure theoretic and functional analytic framework for a differential and integral calculus on infinite-dimensional topological vector spaces (TVSs). In the introductory part, we make some naive approaches and immediately see why they are doomed to fail. We give further motivation from pure mathematics, physics, and financial economics.
                             </p>
                             <p class="material-description">
-                                In the second part, we will introduce the basic notions of measures on locally convex TVSs and consider the problem of choosing "the right" $\sigma$-algebra. We then define Gaussian measures and discuss the celebrated Theorem of Fernique and its consequences. After that we study the associated Cameron--Martin space and consider the example of the finite-dimensional real space $\mathbb{R}^n$ and the classical Wiener space. In the last part of the chapter we state and prove the Theorems of Cameron and Martin and summarize the theory in its most natural setting, separable Fréchet spaces.
+                                In the second part, we will introduce the basic notions of measures on locally convex TVSs and consider the problem of choosing "the right" $\sigma$-algebra. We then define Gaussian measures and discuss the celebrated Theorem of Fernique and its consequences. After that we study the associated Cameron–Martin space and consider the example of the finite-dimensional real space $\mathbb{R}^n$ and the classical Wiener space. In the last part of the chapter we state and prove the Theorems of Cameron and Martin and summarize the theory in its most natural setting, separable Fréchet spaces.
                             </p>
                             <p class="material-description">
                                 Finally, we consider the dual viewpoint, stemming from Quantum Field Theory, in which we start from a formal density w.r.t. a (hypothetical) Lebesgue measure and subsequently develop the corresponding functional analytic framework. In the final chapter we employ parts of the theory to obtain a generalized version of the classical Theorem of Schilder from the Theory of Large Deviations.
