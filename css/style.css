@@ -113,6 +113,15 @@ body {
     background-color: #fff;
 }
 
+/* Account for fixed navbar when jumping to anchors */
+section[id],
+h2[id],
+h3[id],
+.cv-section,
+.publication-item {
+    scroll-margin-top: 110px; /* prevent content being hidden under fixed navbar */
+}
+
 /* ===== UTILITY CLASSES ===== */
 .container {
     max-width: 1200px;
@@ -2163,6 +2172,28 @@ h3 {
 
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
+    /* Global spacing & typography tweaks */
+    .container {
+        padding: 0 16px;
+    }
+
+    section {
+        padding: 60px 0;
+    }
+
+    .page-header {
+        padding: 100px 0 40px;
+    }
+
+    h2 {
+        font-size: 1.9rem;
+        margin-bottom: 28px;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
     .nav-menu {
         position: fixed;
         left: -100%;
@@ -2173,7 +2204,7 @@ h3 {
         text-align: center;
         transition: 0.3s;
         box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-        padding: 20px 0;
+        padding: 24px 0;
     }
 
     .nav-menu.active {
@@ -2232,12 +2263,31 @@ h3 {
 
     .cv-item {
         grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 12px;
+    }
+
+    .cv-date {
+        margin-top: 2px;
+        font-size: 0.9rem;
+    }
+
+    .cv-content h3 {
+        margin-bottom: 6px;
     }
 
     .publication-item {
         grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 12px;
+        padding: 20px;
+    }
+
+    .publication-links {
+        gap: 10px;
+    }
+
+    .pub-link {
+        font-size: 0.85rem;
+        padding: 7px 12px;
     }
 
     .past-course-item {
@@ -2297,27 +2347,36 @@ h3 {
         padding: 20px;
         margin-bottom: 20px;
     }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .skill-category {
+        padding: 20px;
+    }
 }
 
 @media (max-width: 480px) {
     .container {
-        padding: 0 15px;
+        padding: 0 14px;
     }
 
     .hero-text h1 {
-        font-size: 2rem;
+        font-size: 1.75rem;
     }
 
     .page-header h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
     h2 {
-        font-size: 2rem;
+        font-size: 1.6rem;
     }
 
     .btn {
-        padding: 10px 20px;
+        padding: 10px 18px;
         font-size: 14px;
     }
 
@@ -2343,6 +2402,17 @@ h3 {
 
     .contact-form {
         padding: 25px;
+    }
+
+    /* Make lists more compact on small screens */
+    .cv-details li,
+    .cv-service li,
+    .past-courses li {
+        margin-bottom: 4px;
+    }
+
+    .publication-item {
+        padding: 18px;
     }
 }
 
