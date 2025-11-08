@@ -412,6 +412,126 @@ document.addEventListener('DOMContentLoaded', function() {
         this.style.backgroundColor = '#2563eb';
     });
 
+    // ===== SEMINAR NOTES (MOBILE ACCORDION) =====
+    const seminarNotes = document.querySelectorAll('.seminar-note-hover');
+    const seminarMediaQuery = window.matchMedia('(max-width: 768px)');
+
+    function shouldUseSeminarAccordion() {
+        return seminarMediaQuery.matches;
+    }
+
+    function closeSeminarNote(note) {
+        if (!note || !note.classList.contains('open')) {
+            return;
+        }
+
+        note.classList.remove('open');
+        note.setAttribute('aria-expanded', 'false');
+
+        const tooltip = note.querySelector('.tooltip');
+        if (tooltip) {
+            tooltip.style.maxHeight = '0px';
+        }
+    }
+
+    function openSeminarNote(note) {
+        if (!note) {
+            return;
+        }
+
+        const tooltip = note.querySelector('.tooltip');
+        if (!tooltip) {
+            return;
+        }
+
+        note.classList.add('open');
+        note.setAttribute('aria-expanded', 'true');
+        tooltip.style.maxHeight = tooltip.scrollHeight + 'px';
+    }
+
+    function toggleSeminarNote(note) {
+        if (!shouldUseSeminarAccordion()) {
+            return;
+        }
+
+        const isOpen = note.classList.contains('open');
+
+        seminarNotes.forEach(other => {
+            if (other !== note) {
+                closeSeminarNote(other);
+            }
+        });
+
+        if (isOpen) {
+            closeSeminarNote(note);
+        } else {
+            openSeminarNote(note);
+        }
+    }
+
+    seminarNotes.forEach(note => {
+        const tooltip = note.querySelector('.tooltip');
+        if (!tooltip) {
+            return;
+        }
+
+        note.setAttribute('tabindex', '0');
+        note.setAttribute('role', 'button');
+        note.setAttribute('aria-expanded', 'false');
+
+        note.addEventListener('click', (event) => {
+            if (!shouldUseSeminarAccordion()) {
+                return;
+            }
+
+            if (event.target.closest('.seminar-pdf-btn')) {
+                return;
+            }
+
+            event.preventDefault();
+            toggleSeminarNote(note);
+        });
+
+        note.addEventListener('keydown', (event) => {
+            if (!shouldUseSeminarAccordion()) {
+                return;
+            }
+
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                toggleSeminarNote(note);
+            }
+        });
+    });
+
+    function resetSeminarNotes() {
+        if (shouldUseSeminarAccordion()) {
+            seminarNotes.forEach(note => {
+                const tooltip = note.querySelector('.tooltip');
+                if (tooltip && note.classList.contains('open')) {
+                    tooltip.style.maxHeight = tooltip.scrollHeight + 'px';
+                }
+            });
+            return;
+        }
+
+        seminarNotes.forEach(note => {
+            note.classList.remove('open');
+            note.setAttribute('aria-expanded', 'false');
+            const tooltip = note.querySelector('.tooltip');
+            if (tooltip) {
+                tooltip.style.maxHeight = '';
+            }
+        });
+    }
+
+    if (typeof seminarMediaQuery.addEventListener === 'function') {
+        seminarMediaQuery.addEventListener('change', resetSeminarNotes);
+    } else if (typeof seminarMediaQuery.addListener === 'function') {
+        seminarMediaQuery.addListener(resetSeminarNotes);
+    }
+    resetSeminarNotes();
+
     // ===== PERFORMANCE OPTIMIZATIONS =====
     
     // Lazy loading for images
@@ -537,10 +657,67 @@ window.AcademicWebsite = {
 
 // ===== RESEARCH AREA EXPAND/COLLAPSE =====
 
+function setResearchCardExpandedState(topicId, isExpanded) {
+    const card = document.querySelector(`.research-card[data-topic="${topicId}"]`);
+    const button = card ? card.querySelector('.expand-btn') : null;
+    
+    if (card) {
+        card.setAttribute('aria-expanded', String(isExpanded));
+    }
+    
+    if (button) {
+        button.setAttribute('aria-expanded', String(isExpanded));
+    }
+}
+
+function expandContentSection(section) {
+    if (!section || section.classList.contains('active')) {
+        return;
+    }
+
+    section.classList.add('active');
+    section.style.maxHeight = section.scrollHeight + 'px';
+
+    const clearInlineHeight = (event) => {
+        if (event.propertyName === 'max-height') {
+            section.style.maxHeight = '';
+            section.removeEventListener('transitionend', clearInlineHeight);
+        }
+    };
+
+    section.addEventListener('transitionend', clearInlineHeight);
+}
+
+function collapseContentSection(section) {
+    if (!section || !section.classList.contains('active')) {
+        return;
+    }
+
+    section.style.maxHeight = section.scrollHeight + 'px';
+
+    requestAnimationFrame(() => {
+        section.classList.remove('active');
+        section.style.maxHeight = '0px';
+    });
+
+    const clearInlineHeight = (event) => {
+        if (event.propertyName === 'max-height') {
+            section.style.maxHeight = '';
+            section.removeEventListener('transitionend', clearInlineHeight);
+        }
+    };
+
+    section.addEventListener('transitionend', clearInlineHeight);
+}
+
 function toggleExpand(topicId) {
     const expandedContent = document.getElementById(topicId + '-expanded');
     const allExpandedContent = document.querySelectorAll('.expanded-content');
     const clickedCard = document.querySelector(`.research-card[data-topic="${topicId}"]`);
+    
+    if (!expandedContent) {
+        return;
+    }
     
     // Check if we're switching from another expanded section
     const wasAnotherExpanded = Array.from(allExpandedContent).some(content => 
@@ -550,15 +727,19 @@ function toggleExpand(topicId) {
     // Close all other expanded sections
     allExpandedContent.forEach(content => {
         if (content.id !== topicId + '-expanded' && content.classList.contains('active')) {
-            content.classList.remove('active');
+            collapseContentSection(content);
+            const otherTopic = content.id.replace('-expanded', '');
+            setResearchCardExpandedState(otherTopic, false);
         }
     });
     
     // Toggle current section
     if (expandedContent.classList.contains('active')) {
-        expandedContent.classList.remove('active');
+        collapseContentSection(expandedContent);
+        setResearchCardExpandedState(topicId, false);
     } else {
-        expandedContent.classList.add('active');
+        expandContentSection(expandedContent);
+        setResearchCardExpandedState(topicId, true);
         
         // Lazy load video when section is expanded
         const lazyVideo = expandedContent.querySelector('video.lazy-video[data-src]');
@@ -640,9 +821,14 @@ function toggleExpand(topicId) {
 
 function closeExpanded(topicId) {
     const expandedContent = document.getElementById(topicId + '-expanded');
-    const card = document.querySelector(`.research-card[data-topic="${topicId}"]`);
     
-    expandedContent.classList.remove('active');
+    if (!expandedContent) {
+        return;
+    }
+
+    const card = document.querySelector(`.research-card[data-topic="${topicId}"]`);
+    collapseContentSection(expandedContent);
+    setResearchCardExpandedState(topicId, false);
     
     // Scroll back to the card
     if (card) {
@@ -678,6 +864,7 @@ document.addEventListener('DOMContentLoaded', function() {
         card.setAttribute('tabindex', '0');
         card.setAttribute('role', 'button');
         card.setAttribute('aria-label', 'Click to learn more about ' + card.querySelector('h3').textContent);
+        card.setAttribute('aria-expanded', 'false');
         
         card.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' || e.key === ' ') {
