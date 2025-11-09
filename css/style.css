@@ -2320,6 +2320,18 @@ h3 {
 
     .nav-toggle {
         display: flex;
+        padding: 8px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+
+    .nav-toggle:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .bar {
+        width: 26px;
+        height: 3px;
     }
 
     .nav-toggle.active .bar:nth-child(2) {
@@ -2340,6 +2352,12 @@ h3 {
         text-align: center;
     }
 
+    .hero-text .hero-description {
+        text-align: left;
+        line-height: 1.8;
+        font-size: 1rem;
+    }
+
     .profile-img {
         max-width: 220px;
         margin: 0 auto;
@@ -2351,6 +2369,12 @@ h3 {
 
     .hero-buttons {
         justify-content: center;
+    }
+
+    .social-links a {
+        width: 48px;
+        height: 48px;
+        font-size: 1.1rem;
     }
 
     .research-grid {
@@ -2534,6 +2558,22 @@ h3 {
 
     .hero-text h1 {
         font-size: 1.75rem;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .hero-affiliation {
+        font-size: 1rem;
+        margin-bottom: 16px;
+    }
+
+    .hero-text .hero-description {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin-bottom: 24px;
     }
 
     .page-header h1 {
@@ -2556,6 +2596,21 @@ h3 {
     .hero-buttons {
         flex-direction: column;
         align-items: center;
+        gap: 12px;
+    }
+
+    .btn {
+        min-width: 200px;
+    }
+
+    .social-links {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .social-links a {
+        width: 44px;
+        height: 44px;
     }
 
     .research-card-content {
