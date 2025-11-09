@@ -10,28 +10,61 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mobile menu toggle with accessibility features
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
+    let navOverlay = document.querySelector('.nav-overlay');
     
     if (navToggle && navMenu) {
+        if (!navOverlay) {
+            navOverlay = document.createElement('div');
+            navOverlay.className = 'nav-overlay';
+            navOverlay.setAttribute('aria-hidden', 'true');
+            document.body.appendChild(navOverlay);
+        }
+
+        const focusFirstLink = () => {
+            const firstLink = navMenu.querySelector('.nav-link');
+            if (firstLink) {
+                setTimeout(() => firstLink.focus(), 100);
+            }
+        };
+
+        const openMenu = () => {
+            if (navMenu.classList.contains('active')) {
+                return;
+            }
+            navMenu.classList.add('active');
+            navToggle.classList.add('active');
+            navToggle.setAttribute('aria-expanded', 'true');
+            document.body.classList.add('menu-open');
+            navOverlay.classList.add('active');
+            focusFirstLink();
+        };
+
+        const closeMenu = () => {
+            if (!navMenu.classList.contains('active')) {
+                return;
+            }
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('menu-open');
+            navOverlay.classList.remove('active');
+        };
+
         // Toggle menu function
-        function toggleMenu() {
-            const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
-            
-            navMenu.classList.toggle('active');
-            navToggle.classList.toggle('active');
-            navToggle.setAttribute('aria-expanded', !isExpanded);
-            
-            // Focus management
-            if (!isExpanded) {
-                // When opening menu, focus first link
-                const firstLink = navMenu.querySelector('.nav-link');
-                if (firstLink) {
-                    setTimeout(() => firstLink.focus(), 100);
-                }
+        function toggleMenu(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            if (navMenu.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
             }
         }
         
         // Click handler
-        navToggle.addEventListener('click', toggleMenu);
+        navToggle.addEventListener('click', toggleMenu, false);
         
         // Keyboard handler for hamburger button
         navToggle.addEventListener('keydown', function(e) {
@@ -39,11 +72,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
                 toggleMenu();
             }
-            // Escape key closes menu
             if (e.key === 'Escape') {
-                navMenu.classList.remove('active');
-                navToggle.classList.remove('active');
-                navToggle.setAttribute('aria-expanded', 'false');
+                closeMenu();
                 navToggle.focus();
             }
         });
@@ -52,17 +82,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const navLinks = document.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
             link.addEventListener('click', function() {
-                navMenu.classList.remove('active');
-                navToggle.classList.remove('active');
-                navToggle.setAttribute('aria-expanded', 'false');
+                closeMenu();
             });
             
             // Keyboard navigation within menu
             link.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
-                    navMenu.classList.remove('active');
-                    navToggle.classList.remove('active');
-                    navToggle.setAttribute('aria-expanded', 'false');
+                    closeMenu();
                     navToggle.focus();
                 }
             });
@@ -70,22 +96,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Close menu when clicking outside
         document.addEventListener('click', function(event) {
-            if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
-                navMenu.classList.remove('active');
-                navToggle.classList.remove('active');
-                navToggle.setAttribute('aria-expanded', 'false');
+            const isClickInside = navToggle.contains(event.target) || navMenu.contains(event.target);
+            
+            if (!isClickInside && navMenu.classList.contains('active')) {
+                closeMenu();
             }
-        });
+        }, true);
         
         // Close menu on escape key anywhere
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                navToggle.classList.remove('active');
-                navToggle.setAttribute('aria-expanded', 'false');
+                closeMenu();
                 navToggle.focus();
             }
         });
+
+        navOverlay.addEventListener('click', closeMenu);
     }
 
     // Navbar scroll effect
@@ -328,19 +354,6 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 
-    // ===== KEYBOARD NAVIGATION =====
-    
-    // Handle keyboard navigation for accessibility
-    document.addEventListener('keydown', function(e) {
-        // Handle Escape key to close mobile menu
-        if (e.key === 'Escape') {
-            if (navMenu && navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                navToggle.classList.remove('active');
-            }
-        }
-    });
-
     // ===== EXTERNAL LINKS =====
     
     // Add target="_blank" to external links (without icons)
@@ -359,38 +372,12 @@ document.addEventListener('DOMContentLoaded', function() {
     scrollButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
     scrollButton.className = 'scroll-to-top';
     scrollButton.setAttribute('aria-label', 'Scroll to top');
-    
-    // Style the button
-    scrollButton.style.cssText = `
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background-color: #2563eb;
-        color: white;
-        border: none;
-        cursor: pointer;
-        font-size: 18px;
-        box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
-        transition: all 0.3s ease;
-        opacity: 0;
-        visibility: hidden;
-        z-index: 1000;
-    `;
-    
     document.body.appendChild(scrollButton);
     
     // Show/hide scroll button based on scroll position
     window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
-            scrollButton.style.opacity = '1';
-            scrollButton.style.visibility = 'visible';
-        } else {
-            scrollButton.style.opacity = '0';
-            scrollButton.style.visibility = 'hidden';
-        }
+        const showButton = window.pageYOffset > 300;
+        scrollButton.classList.toggle('is-visible', showButton);
     });
     
     // Scroll to top functionality
@@ -401,17 +388,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Hover effect for scroll button
-    scrollButton.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-3px)';
-        this.style.backgroundColor = '#1d4ed8';
-    });
-    
-    scrollButton.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0)';
-        this.style.backgroundColor = '#2563eb';
-    });
-
     // ===== SEMINAR NOTES (MOBILE ACCORDION) =====
     const seminarNotes = document.querySelectorAll('.seminar-note-hover');
     const seminarMediaQuery = window.matchMedia('(max-width: 768px)');

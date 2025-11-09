@@ -117,7 +117,7 @@ body {
     line-height: 1.6;
     color: #333;
     background-color: #fff;
-    font-size: clamp(16px, 1vw + 14px, 18px);
+    font-size: 16px;
 }
 
 /* Account for fixed navbar when jumping to anchors */
@@ -252,10 +252,30 @@ h3[id],
     transition: 0.3s;
 }
 
+.nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 900;
+}
+
+.nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+
 /* ===== HERO SECTION ===== */
 .hero {
-    padding: 120px 0 80px;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: clamp(80px, 12vh, 140px) 0 90px;
+    background: radial-gradient(circle at top right, #e0edff, transparent 45%), linear-gradient(135deg, #f7faff 0%, #eef2ff 45%, #f9fafb 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -263,9 +283,32 @@ h3[id],
 
 .hero-content {
     display: grid;
-    grid-template-columns: 1fr 300px;
-    gap: 60px;
-    align-items: center;
+    grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+    gap: 48px;
+    align-items: stretch;
+}
+
+.hero-text {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 28px;
+    padding: 48px;
+    box-shadow: 0 35px 80px rgba(15, 23, 42, 0.12);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-text::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 28px;
+    background: linear-gradient(120deg, rgba(37, 99, 235, 0.08), rgba(59, 130, 246, 0.02));
+    pointer-events: none;
+}
+
+.hero-text > * {
+    position: relative;
+    z-index: 1;
 }
 
 .hero-text h1 {
@@ -280,53 +323,51 @@ h3[id],
     color: #2563eb;
     margin-bottom: 5px;
     font-weight: 600;
+    text-align: left;
 }
 
 .hero-affiliation {
     font-size: 1.2rem;
     color: #6b7280;
     margin-bottom: 20px;
+    text-align: left;
 }
 
 .hero-description {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: #4b5563;
-    margin-bottom: 30px;
-    line-height: 1.7;
+    margin-bottom: 32px;
+    line-height: 1.8;
     text-align: justify;
+    hyphens: auto;
 }
 
-.research-interests-subtle {
-    margin-bottom: 25px;
-    padding: 0;
-}
-
-.interests-label {
-    font-size: 0.9rem;
-    color: #6b7280;
-    margin-bottom: 8px;
-    font-weight: 500;
-}
-
-.interests-list {
+.hero-buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 16px;
+    margin-bottom: 32px;
+    justify-content: center;
 }
 
-.interests-list span {
-    font-size: 0.85rem;
-    color: #6b7280;
-    padding: 4px 10px;
-    background-color: rgba(107, 114, 128, 0.1);
-    border-radius: 12px;
-    border: 1px solid rgba(107, 114, 128, 0.2);
-    transition: all 0.2s ease;
+.hero-btn {
+    min-width: 180px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2;
 }
 
-.interests-list span:hover {
-    background-color: rgba(107, 114, 128, 0.15);
-    color: #374151;
+.hero-buttons .btn-secondary {
+    background-color: #1e3a8a;
+    color: white;
+    border: none;
+}
+
+.hero-buttons .btn-secondary:hover {
+    background-color: #0f2a6f;
+    color: white;
 }
 
 .research-interests {
@@ -371,15 +412,10 @@ h3[id],
     left: 0;
 }
 
-.hero-buttons {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
 .social-links {
     display: flex;
     gap: 15px;
+    justify-content: center;
 }
 
 .social-links a {
@@ -404,6 +440,30 @@ h3[id],
     transform: translateY(-2px);
 }
 
+.hero-image {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.hero-image picture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-image::before {
+    content: '';
+    position: absolute;
+    width: min(360px, 78vw);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.25), transparent 60%);
+    filter: blur(0.5px);
+}
+
 .arxiv-link {
     font-size: 12px !important;
     font-weight: 700 !important;
@@ -413,7 +473,7 @@ h3[id],
 
 .profile-img {
     width: 100%;
-    max-width: 300px;
+    max-width: 340px;
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
@@ -423,6 +483,40 @@ h3[id],
     image-rendering: crisp-edges;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 54px;
+    height: 54px;
+    border-radius: 999px;
+    border: none;
+    background-color: #2563eb;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    box-shadow: 0 18px 35px rgba(37, 99, 235, 0.35);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 1100;
+}
+
+.scroll-to-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-3px);
+    background-color: #1d4ed8;
 }
 
 /* Hover effect removed for profile image */
@@ -456,6 +550,7 @@ h2 {
     font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem);
     color: #1f2937;
     margin-bottom: 40px;
+    margin-top: 28px; /* increase space above section titles */
     text-align: center;
 }
 
@@ -1149,11 +1244,20 @@ h3 {
     margin-bottom: 15px;
 }
 
+.course-type {
+    color: #1f2937;
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
 .course-description {
-    color: #4b5563;
+    color: #6b7280;
     margin-bottom: 20px;
     line-height: 1.6;
     text-align: justify;
+    font-size: 0.95rem;
 }
 
 .course-info {
@@ -2251,78 +2355,103 @@ h3 {
 
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
     /* Global spacing & typography tweaks */
     .container {
         padding: 0 16px;
     }
 
     section {
-        padding: 60px 0;
+        padding: 40px 0;
     }
 
     .page-header {
-        padding: 100px 0 40px;
+        padding: 60px 0 20px;
+    }
+
+    /* Tighten space below header */
+    .page-header + section {
+        padding-top: 16px;
     }
 
     h2 {
-        font-size: 1.9rem;
+        font-size: 1.5rem;
         margin-bottom: 28px;
     }
 
     h3 {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+    }
+
+    .page-header p {
+        font-size: 0.95rem;
+        text-align: justify;
+        line-height: 1.6;
+        margin-top: 0;
+    }
+
+    .navbar {
+        padding: 10px 0;
+    }
+
+    .navbar.scrolled {
+        padding: 8px 0;
+    }
+
+    .nav-brand a {
+        font-size: 18px;
     }
 
     .nav-menu {
         position: fixed;
-        left: -100%;
-        top: 70px;
+        inset: 0;
+        top: 0;
         flex-direction: column;
-        background-color: white;
+        background: rgba(15, 23, 42, 0.96);
+        backdrop-filter: blur(12px);
         width: 100%;
-        text-align: center;
-        transition: 0.3s;
-        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-        padding: 24px 0;
-        z-index: 999;
+        height: 100vh;
+        text-align: left;
+        transition: transform 0.35s ease;
+        padding: 110px 32px 48px;
+        z-index: 1000;
+        gap: 10px;
+        transform: translateY(-100%);
     }
 
     .nav-menu.active {
-        left: 0;
+        transform: translateY(0);
     }
 
     .nav-menu a {
-        padding: 12px 20px;
+        padding: 12px 0;
         display: block;
-        min-height: 44px;
-        line-height: 44px;
-        padding-top: 0;
-        padding-bottom: 0;
+        min-height: auto;
+        line-height: 1.4;
+        font-size: 1.05rem;
+        color: #e2e8f0;
+        border-bottom: 1px solid rgba(248, 250, 252, 0.15);
+        width: 100%;
     }
 
-    /* Backdrop for mobile menu */
-    .nav-menu.active::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.3);
-        z-index: -1;
-        animation: fadeIn 0.3s ease;
+    .nav-menu a:last-child {
+        border-bottom: none;
     }
 
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+    .nav-menu .nav-link.active {
+        color: #93c5fd;
     }
 
     .nav-toggle {
         display: flex;
-        padding: 8px;
+        padding: 6px;
         border-radius: 4px;
         transition: background-color 0.3s ease;
+        position: relative;
+        z-index: 1201;
     }
 
     .nav-toggle:hover {
@@ -2330,8 +2459,8 @@ h3 {
     }
 
     .bar {
-        width: 26px;
-        height: 3px;
+        width: 22px;
+        height: 2px;
         transition: all 0.3s ease;
     }
 
@@ -2347,55 +2476,89 @@ h3 {
         transform: translateY(-9px) rotate(-45deg);
     }
 
+    .hero {
+        padding: 90px 0 56px;
+        min-height: auto;
+    }
+
     .hero-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        text-align: center;
-    }
-
-    .hero-text .hero-description {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
         text-align: left;
-        line-height: 1.8;
-        font-size: 1rem;
+        align-items: center;
     }
 
-    .profile-img {
-        max-width: 220px;
-        margin: 0 auto;
+    .hero-image {
+        order: -1;
+        width: auto;
+        max-width: min(360px, 80vw);
+        margin: 0 auto 12px;
+        align-self: center;
+    }
+
+    .hero-text {
+        padding: 28px 24px;
     }
 
     .hero-text h1 {
-        font-size: 2.5rem;
+        font-size: 1.9rem;
+        margin-bottom: 10px;
+    }
+
+    .hero-text .hero-description {
+        text-align: justify;
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+
+    .hero-image {
+        margin: 24px auto 24px;
+        justify-content: center;
+        align-self: center;
     }
 
     .hero-buttons {
         justify-content: center;
+        gap: 12px;
+    }
+
+    .social-links {
+        gap: 10px;
+        margin-top: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
     }
 
     .social-links a {
-        width: 48px;
-        height: 48px;
-        font-size: 1.1rem;
+        width: 42px;
+        height: 42px;
+        font-size: 0.95rem;
+    }
+
+    .scroll-to-top {
+        display: none !important;
     }
 
     .research-grid {
         grid-template-columns: 1fr;
-        gap: 24px;
+        gap: 16px;
     }
 
     .research-card-content {
-        padding: 28px 22px 22px;
+        padding: 20px 16px 16px;
         min-height: auto;
     }
 
     .research-card-content h3 {
-        font-size: 1.15rem;
-        margin-bottom: 20px;
+        font-size: 1.05rem;
+        margin-bottom: 12px;
     }
 
     .expand-btn {
-        padding: 12px 18px;
-        font-size: 0.9rem;
+        padding: 10px 16px;
+        font-size: 0.875rem;
+        margin-top: 12px;
     }
 
     .about-content {
@@ -2447,6 +2610,23 @@ h3 {
         grid-template-columns: 1fr;
         gap: 12px;
         padding: 20px;
+    }
+
+    .publication-item h3 {
+        font-size: 1.1rem;
+    }
+
+    .authors {
+        font-size: 0.9rem;
+    }
+
+    .venue {
+        font-size: 0.85rem;
+    }
+
+    .abstract, .publication-abstract {
+        font-size: 0.9rem;
+        line-height: 1.5;
     }
 
     .publication-item .abstract {
@@ -2545,178 +2725,292 @@ h3 {
 }
 
 @media (max-width: 480px) {
-    .container {
-        padding: 0 14px;
-    }
-
-    section {
-        padding: 45px 0;
-    }
-
-    .page-header {
-        padding: 90px 0 35px;
-    }
-
-    .hero-text h1 {
-        font-size: 1.75rem;
-        line-height: 1.2;
-    }
-
-    .hero-subtitle {
-        font-size: 1.1rem;
-    }
-
-    .hero-affiliation {
-        font-size: 1rem;
-        margin-bottom: 16px;
-    }
-
-    .hero-text .hero-description {
-        font-size: 0.95rem;
-        line-height: 1.7;
-        margin-bottom: 24px;
-    }
-
-    .page-header h1 {
-        font-size: 1.8rem;
-    }
-
-    h2 {
-        font-size: 1.6rem;
-    }
-
-    .profile-img {
-        max-width: 180px;
-    }
-
-    .btn {
-        padding: 10px 18px;
+    body {
         font-size: 14px;
     }
 
-    .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
+    .container {
+        padding: 0 12px;
+    }
+
+    section {
+        padding: 30px 0;
+    }
+
+    .hero {
+        padding: 76px 0 40px;
+    }
+
+    .page-header {
+        padding: 56px 0 16px;
+    }
+
+    /* Reduce gap between header and following section on small phones */
+    .page-header + section {
+        padding-top: 12px;
+    }
+
+    .hero-text {
+        padding: 22px 18px;
+    }
+
+    .hero-text h1 {
+        font-size: 1.45rem;
+        line-height: 1.25;
+        margin-bottom: 8px;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+    }
+
+    .hero-affiliation {
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+    }
+
+    .hero-text .hero-description {
+        font-size: 0.88rem;
+        line-height: 1.55;
+        margin-bottom: 16px;
+        text-align: justify;
+    }
+
+    .page-header h1 {
+        font-size: 1.4rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+        margin-bottom: 16px;
+    }
+
+    h3 {
+        font-size: 1.05rem;
+    }
+
+    p, li, .publication-abstract, .research-card-content p {
+        font-size: 0.875rem;
+        line-height: 1.5;
+    }
+
+    .page-header p {
+        font-size: 0.875rem;
+        text-align: justify;
+        line-height: 1.5;
+        margin-top: 0;
+    }
+
+    .profile-img {
+        max-width: 200px;
     }
 
     .btn {
-        min-width: 200px;
+        padding: 8px 14px;
+        font-size: 0.85rem;
+    }
+
+    .hero-buttons {
+        flex-direction: row;
+        align-items: stretch;
+        gap: 10px;
+        margin-top: 8px;
+    }
+
+    .hero-buttons .btn {
+        flex: 1 1 45%;
+        min-width: 0;
     }
 
     .social-links {
         justify-content: center;
-        gap: 12px;
+        gap: 10px;
+        margin-top: 10px;
     }
 
     .social-links a {
-        width: 44px;
-        height: 44px;
+        width: 38px;
+        height: 38px;
+        font-size: 0.9rem;
     }
 
     .research-card-content {
-        padding: 24px 18px 18px;
+        padding: 18px 14px 14px;
     }
 
     .research-card-content h3 {
-        font-size: 1.05rem;
-        margin-bottom: 18px;
+        font-size: 1rem;
+        margin-bottom: 10px;
     }
 
     .expand-btn {
         width: 100%;
-        padding: 11px 16px;
-        font-size: 0.85rem;
+        padding: 9px 14px;
+        font-size: 0.8rem;
     }
 
     .publication-filters {
-        gap: 10px;
+        gap: 8px;
+        margin-bottom: 16px;
     }
 
     .filter-btn {
-        padding: 8px 16px;
-        font-size: 14px;
+        padding: 6px 12px;
+        font-size: 0.8rem;
     }
 
     .courses-grid,
     .projects-grid,
     .resources-grid {
         grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .course-type {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .course-description {
+        font-size: 0.875rem;
+        line-height: 1.5;
     }
 
     .contact-form {
-        padding: 25px;
+        padding: 18px;
     }
 
     /* Make lists more compact on small screens */
     .cv-details li,
     .cv-service li,
     .past-courses li {
-        margin-bottom: 4px;
+        margin-bottom: 3px;
+        font-size: 0.875rem;
     }
 
     .publication-item {
-        padding: 18px;
+        padding: 14px;
+        margin-bottom: 12px;
+    }
+
+    .publication-header h3 {
+        font-size: 1rem;
+        margin-bottom: 6px;
+    }
+
+    .pub-meta {
+        font-size: 0.8rem;
+        margin-bottom: 8px;
+    }
+
+    .authors {
+        font-size: 0.85rem;
+        margin-bottom: 4px;
+    }
+
+    .venue {
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+    }
+
+    .abstract, .publication-abstract {
+        font-size: 0.875rem;
+        line-height: 1.5;
+    }
+
+    .pub-link {
+        font-size: 0.75rem;
+        padding: 7px 12px;
+    }
+
+    .publication-links {
+        gap: 8px;
     }
 }
 
     /* ===== ULTRA-SMALL SCREENS (360px and below) ===== */
     @media (max-width: 360px) {
+        body {
+            font-size: 13px;
+        }
+
         .container {
-            padding: 0 12px;
+            padding: 0 10px;
         }
 
         section {
-            padding: 40px 0;
+            padding: 25px 0;
         }
 
         .page-header {
-            padding: 85px 0 30px;
+            padding: 50px 0 14px;
         }
 
-        .hero-text h1 {
-            font-size: 1.5rem;
-            line-height: 1.3;
+        /* Tighten gap for ultra-small screens */
+        .page-header + section {
+            padding-top: 10px;
         }
+
+    .hero {
+        padding: 70px 0 32px;
+    }
+
+    .hero-text h1 {
+        font-size: 1.28rem;
+        line-height: 1.3;
+        margin-bottom: 6px;
+    }
 
         .page-header h1 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
         }
 
         h2 {
-            font-size: 1.4rem;
-            margin-bottom: 20px;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
         }
 
         h3 {
             font-size: 1rem;
         }
 
+        p, li {
+            font-size: 0.85rem;
+        }
+
+        .page-header p {
+            font-size: 0.85rem;
+            text-align: justify;
+            margin-top: 0;
+        }
+
         .profile-img {
-            max-width: 160px;
+            max-width: 170px;
         }
 
         .btn {
-            padding: 9px 16px;
-            font-size: 13px;
+            padding: 7px 12px;
+            font-size: 0.8rem;
         }
 
         .research-card-content {
-            padding: 20px 14px 14px;
+            padding: 14px 10px 10px;
         }
 
         .expand-btn {
-            padding: 10px 14px;
-            font-size: 0.8rem;
+            padding: 8px 12px;
+            font-size: 0.75rem;
         }
 
         .publication-item {
-            padding: 16px;
+            padding: 12px;
         }
 
         .pub-link {
-            font-size: 0.8rem;
-            padding: 9px 12px;
+            font-size: 0.75rem;
+            padding: 7px 10px;
         }
 
         .expanded-header {
