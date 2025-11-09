@@ -460,7 +460,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            if (event.target.closest('.seminar-pdf-btn')) {
+            if (event.target.closest('.seminar-pdf-btn') || event.target.closest('.seminar-details-btn')) {
                 return;
             }
 
@@ -478,6 +478,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 toggleSeminarNote(note);
             }
         });
+
+        // Add details button handler
+        const detailsBtn = note.querySelector('.seminar-details-btn');
+        if (detailsBtn) {
+            detailsBtn.addEventListener('click', (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                
+                // Close other open notes first
+                seminarNotes.forEach(other => {
+                    if (other !== note) {
+                        closeSeminarNote(other);
+                    }
+                });
+                
+                // Toggle current note
+                if (note.classList.contains('open')) {
+                    closeSeminarNote(note);
+                } else {
+                    openSeminarNote(note);
+                }
+            });
+        }
     });
 
     function resetSeminarNotes() {
@@ -854,3 +877,87 @@ document.addEventListener('DOMContentLoaded', function() {
 // Make functions globally available
 window.toggleExpand = toggleExpand;
 window.closeExpanded = closeExpanded;
+
+// ===== FULLSCREEN VIDEO MODAL =====
+
+function openVideoModal(videoSrc) {
+    const modal = document.getElementById('videoModal');
+    const modalSource = document.getElementById('modalVideoSource');
+    const modalVideo = document.getElementById('modalVideo');
+    
+    if (!modal || !modalSource) {
+        return;
+    }
+    
+    modalSource.src = videoSrc;
+    modalVideo.load();
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Auto-play video
+    modalVideo.play().catch(err => console.log('Video autoplay prevented:', err));
+}
+
+function closeVideoModal() {
+    const modal = document.getElementById('videoModal');
+    const modalVideo = document.getElementById('modalVideo');
+    
+    if (!modal) {
+        return;
+    }
+    
+    modal.classList.remove('active');
+    modalVideo.pause();
+    document.body.style.overflow = '';
+}
+
+// Add click handlers to expanded videos for fullscreen
+document.addEventListener('DOMContentLoaded', function() {
+    const expandedVideos = document.querySelectorAll('.expanded-figure-fullwidth');
+    
+    expandedVideos.forEach(video => {
+        video.style.cursor = 'pointer';
+        
+        video.addEventListener('click', function() {
+            const videoSrc = this.querySelector('source')?.getAttribute('data-src') || 
+                           this.querySelector('source')?.src ||
+                           this.getAttribute('data-src') ||
+                           this.src;
+            
+            if (videoSrc) {
+                openVideoModal(videoSrc);
+            }
+        });
+        
+        // Add hover effect
+        video.addEventListener('mouseenter', function() {
+            this.style.opacity = '0.8';
+        });
+        
+        video.addEventListener('mouseleave', function() {
+            this.style.opacity = '1';
+        });
+    });
+    
+    // Close modal when clicking outside the video
+    const modal = document.getElementById('videoModal');
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeVideoModal();
+            }
+        });
+        
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeVideoModal();
+            }
+        });
+    }
+});
+
+// Make functions globally available
+window.openVideoModal = openVideoModal;
+window.closeVideoModal = closeVideoModal;
+
