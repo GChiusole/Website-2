@@ -216,6 +216,9 @@ h3[id],
 }
 
 .nav-link {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
     text-decoration: none;
     color: #4b5563;
     font-weight: 500;
@@ -532,6 +535,11 @@ section {
     text-align: center;
 }
 
+/* Compact variant for pages without description (e.g., Contact) */
+.page-header.page-header--compact {
+    padding: 90px 0 20px;
+}
+
 .page-header h1 {
     font-size: 3rem;
     color: #1f2937;
@@ -550,7 +558,7 @@ h2 {
     font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem);
     color: #1f2937;
     margin-bottom: 20px;
-    margin-top: 14px; /* increase space above section titles */
+    margin-top: 0;
     text-align: center;
 }
 
@@ -703,11 +711,12 @@ h3 {
 /* ===== RESEARCH PAGE STYLES ===== */
 .research-overview {
     background-color: white;
+    padding: 30px 0;
 }
 
 /* Add top padding to research page header for better spacing */
 .page-header + .research-overview {
-    padding-top: 20px;
+    padding-top: 30px;
 }
 
 .research-grid {
@@ -880,20 +889,30 @@ h3 {
     background-color: #ef4444;
     color: white;
     border: none;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    aspect-ratio: 1 / 1;
+    flex: 0 0 36px;
+    min-width: 36px;
+    min-height: 36px;
+    max-width: 36px;
+    max-height: 36px;
+    padding: 0;
+    box-sizing: border-box;
+    border-radius: 6px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
+    line-height: 0;
     font-size: 1rem;
+    appearance: none;
+    -webkit-appearance: none;
+    overflow: hidden;
 }
 
 .close-btn:hover {
     background-color: #dc2626;
-    transform: rotate(90deg);
 }
 
 .expanded-body {
@@ -986,7 +1005,7 @@ h3 {
 /* ===== RESEARCH IMAGES SECTION ===== */
 .research-images {
     background-color: #f8fafc;
-    padding: 80px 0;
+    padding: 30px 0;
 }
 
 .research-images .section-description {
@@ -1068,6 +1087,7 @@ h3 {
 
 .publications {
     background-color: #f8fafc;
+    padding: 30px 0;
 }
 
 .publication-filters {
@@ -1207,7 +1227,8 @@ h3 {
 }
 
 .current-courses {
-    background-color: #f8fafc;
+    background-color: white;
+    padding: 30px 0;
 }
 
 .courses-grid {
@@ -1327,7 +1348,8 @@ h3 {
 }
 
 .past-courses {
-    background-color: white;
+    background-color: #f8fafc;
+    padding: 30px 0;
 }
 
 .past-courses-list {
@@ -1350,7 +1372,7 @@ h3 {
     grid-template-columns: 2fr 1.3fr 1fr;
     gap: 20px;
     padding: 15px;
-    background-color: #f8fafc;
+    background-color: white;
     border-radius: 8px;
     margin-bottom: 10px;
     align-items: center;
@@ -1380,7 +1402,8 @@ h3 {
 }
 
 .mentoring {
-    background-color: #f8fafc;
+    background-color: white;
+    padding: 30px 0;
 }
 
 .mentoring-content {
@@ -1416,7 +1439,11 @@ h3 {
     margin-top: 5px;
 }
 
-.current-students,
+.current-students {
+    margin-bottom: 30px;
+    padding-top: 50px;
+}
+
 .alumni-highlights {
     margin-bottom: 40px;
 }
@@ -1434,7 +1461,7 @@ h3 {
 }
 
 .student-item {
-    background-color: white;
+    background-color: #f8fafc;
     padding: 25px;
     border-radius: 8px;
     border-left: 4px solid #2563eb;
@@ -1600,8 +1627,9 @@ h3 {
 }
 
 .cv-section {
-    margin-bottom: 50px;
-    padding-bottom: 40px;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 30px 0;
     border-bottom: 1px solid #e5e7eb;
 }
 
@@ -1611,7 +1639,8 @@ h3 {
 
 .cv-section h2 {
     text-align: left;
-    margin-bottom: 30px;
+    margin-top: -5px;
+    margin-bottom: 8px;
     color: #1f2937;
 }
 
@@ -1619,7 +1648,7 @@ h3 {
     display: grid;
     grid-template-columns: 120px 1fr;
     gap: 25px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .cv-date {
@@ -2085,6 +2114,7 @@ h3 {
 /* ===== CONTACT PAGE STYLES ===== */
 .contact-content {
     background-color: white;
+    padding: 10px 0;
 }
 
 .contact-layout {
@@ -2121,6 +2151,7 @@ h3 {
 .contact-item.map-section {
     height: 100%;
     min-height: 400px;
+    padding-bottom: 0px;
 }
 
 .contact-header {
@@ -2776,8 +2807,6 @@ h3 {
     }
 
     .close-btn {
-        width: 44px;
-        height: 44px;
         font-size: 1.1rem;
     }
 
@@ -3212,8 +3241,6 @@ h3 {
         }
 
         .close-btn {
-            width: 40px;
-            height: 40px;
             font-size: 1rem;
         }
 
