@@ -1173,12 +1173,20 @@ h3 {
 }
 
 .status {
-    background-color: #e0f2fe;
-    color: #0277bd;
     padding: 5px 12px;
     border-radius: 15px;
     font-size: 0.9rem;
     font-weight: 500;
+}
+
+.publication-item[data-category="preprint"] .status {
+    background-color: #e0f2fe;
+    color: #0277bd;
+}
+
+.publication-item[data-category="journal"] .status {
+    background-color: #dcfce7;
+    color: #166534;
 }
 
 .ongoing-projects {
