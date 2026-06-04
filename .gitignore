@@ -16,6 +16,7 @@ npm-debug.log*
 .Trashes
 ehthumbs.db
 Thumbs.db
+.PowerFolder/
 
 # Logs
 logs
