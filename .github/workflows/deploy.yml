@@ -30,11 +30,27 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
+      - name: Build public artifact
+        run: |
+          set -euo pipefail
+          mkdir -p _site/assets _site/images
+          cp *.html CNAME .nojekyll _site/
+          cp -R css js _site/
+          cp assets/cv-gideon-chiusole.pdf _site/assets/
+          cp -R assets/citations assets/publications assets/seminars _site/assets/
+          find images -maxdepth 1 -type f \( \
+            -name '*.jpg' -o \
+            -name '*.jpeg' -o \
+            -name '*.png' -o \
+            -name '*.gif' -o \
+            -name '*.webp' -o \
+            -name '*.mp4' \
+          \) -exec cp {} _site/images/ \;
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
+          path: '_site'
 
   # Deployment job
   deploy:
