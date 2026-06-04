@@ -68,10 +68,12 @@ p a, li a, .hero-description a {
 /* Ensure links have sufficient contrast */
 a {
     color: #1e40af; /* Darker blue for better contrast */
+    text-decoration: none;
 }
 
 a:hover {
     color: #1d4ed8;
+    text-decoration: none;
 }
 
 /* High contrast mode support */
@@ -343,6 +345,16 @@ body.menu-open {
     line-height: 1.8;
     text-align: justify;
     hyphens: auto;
+}
+
+.hero-description a {
+    color: #1e40af;
+    text-decoration: none;
+}
+
+.hero-description a:hover {
+    color: #1d4ed8;
+    text-decoration: none;
 }
 
 .hero-buttons {
@@ -1332,7 +1344,7 @@ h3 {
 
 .course-info .instructors div a:hover {
     color: #1d4ed8;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .course-links {
@@ -2195,7 +2207,7 @@ h3 {
 
 .contact-item a:hover {
     color: #1d4ed8;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .map-container {
