@@ -327,7 +327,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         lastUpdatedElements.forEach(element => {
-            element.textContent = currentDate;
+            // Deploy workflow injects the real per-page git date at build time;
+            // only fall back to today's date if that injection didn't happen
+            // (e.g. viewing the file locally without running the build).
+            if (!element.textContent.trim()) {
+                element.textContent = currentDate;
+            }
         });
     }
 

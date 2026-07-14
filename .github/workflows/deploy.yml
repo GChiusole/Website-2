@@ -26,6 +26,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Full history is required so "git log" below can find each
+          # page's true last-modified commit rather than just the latest one.
+          fetch-depth: 0
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -46,6 +50,17 @@ jobs:
             -name '*.webp' -o \
             -name '*.mp4' \
           \) -exec cp {} _site/images/ \;
+
+      - name: Inject last-updated dates
+        run: |
+          set -euo pipefail
+          for file in _site/*.html; do
+            base=$(basename "$file")
+            date=$(git log -1 --format=%cd --date=format:'%B %-d, %Y' -- "$base" || true)
+            if [ -n "$date" ]; then
+              sed -i "s#<span id=\"last-updated\"></span>#<span id=\"last-updated\">${date}</span>#" "$file"
+            fi
+          done
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
