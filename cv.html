@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Curriculum Vitae - Gideon R. Chiusole">
     <title>CV - Gideon R. Chiusole</title>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CV - Gideon R. Chiusole">
+    <meta property="og:description" content="Curriculum Vitae - Gideon R. Chiusole">
+    <meta property="og:url" content="https://www.gideon-chiusole.com/cv.html">
+    <meta property="og:image" content="https://www.gideon-chiusole.com/images/photo.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CV - Gideon R. Chiusole">
+    <meta name="twitter:description" content="Curriculum Vitae - Gideon R. Chiusole">
+    <meta name="twitter:image" content="https://www.gideon-chiusole.com/images/photo.jpg">
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="https://github.com/GChiusole.png?size=32">
     <link rel="icon" type="image/png" sizes="16x16" href="https://github.com/GChiusole.png?size=16">
@@ -37,11 +46,11 @@
                 <a href="cv.html" class="nav-link active">CV</a>
                 <a href="contact.html" class="nav-link">Contact</a>
             </div>
-            <div class="nav-toggle" id="nav-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu" type="button">
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
+            </button>
         </div>
     </nav>
 
@@ -234,6 +243,7 @@
                                 <p class="cv-details">Transition funding between M.Sc. and Ph.D. (declined)</p>
                             </div>
                         </div>
+                    </section>
 
                     <section id="awards" class="cv-section">
                         <h2>Volunteering & Activities</h2>
@@ -305,7 +315,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Gideon R. Chiusole. All rights reserved.</p>
+            <p>&copy; <span id="copyright-year">2024</span> Gideon R. Chiusole. All rights reserved.</p>
             <p>Last updated: <span id="last-updated"></span></p>
         </div>
     </footer>

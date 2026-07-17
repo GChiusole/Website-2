@@ -214,110 +214,8 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('scroll', updateCVNav);
     }
 
-    // ===== CONTACT FORM =====
-    
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const subject = formData.get('subject');
-            const message = formData.get('message');
-            
-            // Basic validation
-            if (!name || !email || !subject || !message) {
-                showNotification('Please fill in all required fields.', 'error');
-                return;
-            }
-            
-            if (!isValidEmail(email)) {
-                showNotification('Please enter a valid email address.', 'error');
-                return;
-            }
-            
-            // Show loading state
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-            
-            // Simulate form submission (replace with actual form handling)
-            setTimeout(() => {
-                showNotification('Thank you for your message! I will get back to you soon.', 'success');
-                contactForm.reset();
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
-        });
-    }
-
-    // ===== UTILITY FUNCTIONS =====
-    
-    function isValidEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    }
-    
-    function showNotification(message, type = 'info') {
-        // Remove existing notifications
-        const existingNotifications = document.querySelectorAll('.notification');
-        existingNotifications.forEach(notification => notification.remove());
-        
-        // Create notification element
-        const notification = document.createElement('div');
-        notification.className = `notification notification-${type}`;
-        notification.textContent = message;
-        
-        // Add styles
-        notification.style.cssText = `
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: 8px;
-            color: white;
-            font-weight: 500;
-            z-index: 10000;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-            max-width: 300px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        `;
-        
-        // Set background color based on type
-        if (type === 'success') {
-            notification.style.backgroundColor = '#10b981';
-        } else if (type === 'error') {
-            notification.style.backgroundColor = '#ef4444';
-        } else {
-            notification.style.backgroundColor = '#3b82f6';
-        }
-        
-        // Add to page
-        document.body.appendChild(notification);
-        
-        // Animate in
-        setTimeout(() => {
-            notification.style.transform = 'translateX(0)';
-        }, 100);
-        
-        // Auto remove after 5 seconds
-        setTimeout(() => {
-            notification.style.transform = 'translateX(100%)';
-            setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.parentNode.removeChild(notification);
-                }
-            }, 300);
-        }, 5000);
-    }
-
     // ===== LAST UPDATED DATE =====
-    
+
     const lastUpdatedElements = document.querySelectorAll('#last-updated');
     if (lastUpdatedElements.length > 0) {
         const currentDate = new Date().toLocaleDateString('en-US', {
@@ -325,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
             month: 'long',
             day: 'numeric'
         });
-        
+
         lastUpdatedElements.forEach(element => {
             // Deploy workflow injects the real per-page git date at build time;
             // only fall back to today's date if that injection didn't happen
@@ -335,6 +233,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // ===== COPYRIGHT YEAR =====
+
+    const copyrightYearElements = document.querySelectorAll('#copyright-year');
+    copyrightYearElements.forEach(element => {
+        element.textContent = new Date().getFullYear();
+    });
 
     // ===== INTERSECTION OBSERVER FOR ANIMATIONS =====
     
@@ -573,62 +478,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     */
-
-    // ===== CONSOLE MESSAGE =====
-    
-    console.log(`
-    ╔══════════════════════════════════════════════════════════════╗
-    ║                    Academic Website                          ║
-    ║                   Built with ❤️                              ║
-    ║                                                              ║
-    ║  To customize this website:                                  ║
-    ║  1. Replace placeholder content with your information        ║
-    ║  2. Add your profile picture to images/profile.jpg           ║
-    ║  3. Update the contact form with your preferred method       ║
-    ║  4. Customize colors in css/style.css                       ║
-    ║                                                              ║
-    ║  For GitHub Pages deployment instructions, see README.md     ║
-    ╚══════════════════════════════════════════════════════════════╝
-    `);
 });
-
-// ===== ADDITIONAL UTILITY FUNCTIONS =====
-
-// Function to copy text to clipboard (useful for contact info)
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        showNotification('Copied to clipboard!', 'success');
-    }).catch(() => {
-        showNotification('Failed to copy to clipboard', 'error');
-    });
-}
-
-// Function to download CV (if you want to track downloads)
-function downloadCV() {
-    // Track CV downloads if you have analytics
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'download', {
-            'event_category': 'CV',
-            'event_label': 'PDF Download'
-        });
-    }
-}
-
-// Function to format publication citations
-function formatCitation(authors, title, venue, year) {
-    return `${authors}. "${title}" ${venue}, ${year}.`;
-}
-
-// Function to validate form fields
-function validateField(field, value) {
-    const validations = {
-        email: (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val),
-        required: (val) => val && val.trim().length > 0,
-        minLength: (val, min = 3) => val && val.length >= min
-    };
-    
-    return validations[field] ? validations[field](value) : true;
-}
 
     // ===== RESEARCH AREA IMAGE HOVER EFFECT =====
     // Swap between static PNG and animated GIF on hover
@@ -650,14 +500,6 @@ function validateField(field, value) {
             this.src = staticSrc;
         });
     });
-
-// Export functions for use in other scripts if needed
-window.AcademicWebsite = {
-    copyToClipboard,
-    downloadCV,
-    formatCitation,
-    validateField
-};
 
 // ===== RESEARCH AREA EXPAND/COLLAPSE =====
 
