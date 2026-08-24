@@ -1,0 +1,114 @@
+% cvstyle.sty -- layout for Gideon Chiusole's CV.
+% All formatting lives here; cv.tex holds only content.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{cvstyle}[2026/08/24 Chiusole CV style]
+
+% ---------------------------------------------------------------- fonts ----
+\RequirePackage[T1]{fontenc}
+\RequirePackage{newtxtext}   % Times clone with real small caps
+\RequirePackage{newtxmath}
+\RequirePackage{microtype}
+
+% --------------------------------------------------------------- layout ----
+% Margins measured from the original Word/PDF: text block 506pt wide.
+\RequirePackage[a4paper,left=41pt,right=48pt,top=22pt,bottom=32pt]{geometry}
+\RequirePackage{array}
+\RequirePackage{enumitem}
+\RequirePackage{xcolor}
+\RequirePackage{graphicx}
+\RequirePackage{etoolbox}
+\RequirePackage[hidelinks]{hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\frenchspacing        % single space after '.', as in the Word original
+\pagestyle{empty}
+\raggedbottom
+
+% Width of the right-hand date column.
+\newlength{\cvdatewidth}
+\setlength{\cvdatewidth}{64pt}
+% Thickness of the rule under each section heading.
+\newlength{\cvrulewidth}
+\setlength{\cvrulewidth}{1.4pt}
+% Width of one cell in the three-column contact row.
+\newlength{\cvthird}
+
+% ------------------------------------------------------------- metadata ----
+% \cvmeta{Gideon Chiusole}{Curriculum Vitae} -- fills in the PDF's Title and
+% Author fields, which browsers show in the tab and search engines index.
+\newcommand{\cvmeta}[2]{%
+  \hypersetup{pdfauthor={#1}, pdftitle={#1 -- #2}, pdfsubject={#2},
+              pdfcreator={pdfLaTeX}}%
+}
+
+% --------------------------------------------------------------- header ----
+% \cvname{Gideon Chiusole}
+\newcommand{\cvname}[1]{%
+  \begingroup
+  \centering
+  {\fontsize{15}{17}\selectfont\bfseries\scshape #1}\par
+  \endgroup
+  \vspace{2pt}%
+}
+
+% \cvcontact{email}{website}{location} -- three equal cells, vertical rules.
+\newcommand{\cvcontact}[3]{%
+  \begingroup
+  \setlength{\arrayrulewidth}{\cvrulewidth}%
+  \setlength{\tabcolsep}{0pt}%
+  \fontsize{9}{11}\selectfont\bfseries
+  \setlength{\cvthird}{\dimexpr(\linewidth-2\arrayrulewidth)/3\relax}%
+  \noindent\begin{tabular}{@{}p{\cvthird}!{\vrule}p{\cvthird}!{\vrule}p{\cvthird}@{}}
+    \centering#1 & \centering#2 & \centering\arraybackslash#3
+  \end{tabular}\par
+  \endgroup
+  \vspace{1pt}%
+}
+
+% -------------------------------------------------------------- sections ---
+% \cvsection{Education}
+\newcommand{\cvsection}[1]{%
+  \par\addvspace{2.5pt}%
+  {\fontsize{11}{12}\selectfont\bfseries\scshape #1}\par
+  \nointerlineskip\vspace{1.5pt}%
+  {\color{black}\rule{\linewidth}{\cvrulewidth}}\par
+  \vspace{2pt}%
+}
+
+% ---------------------------------------------------------------- lines ----
+% \cvline{<free text>}{<date>} -- text left, date flush right, text wraps
+% inside its own column so a long line can never shove the date around.
+\newcommand{\cvline}[2]{%
+  \par\addvspace{1pt}%
+  \noindent
+  \ifblank{#2}{#1}{%
+    \parbox[t]{\dimexpr\linewidth-\cvdatewidth-4pt\relax}{\raggedright #1}%
+    \hfill
+    \makebox[\cvdatewidth][r]{#2}%
+  }%
+  \par
+}
+
+% \cventry{Institution -- Degree}{dates} -- a bold \cvline.
+\newcommand{\cventry}[2]{\cvline{\textbf{#1}}{#2}}
+
+% \cvrole{Teaching Assistant} -- italic job title under a \cventry.
+\newcommand{\cvrole}[1]{\par\textit{#1}\par}
+
+% ---------------------------------------------------------------- lists ----
+\setlist[itemize]{
+  topsep=0.3pt, partopsep=0pt, parsep=0pt, itemsep=0pt,
+  leftmargin=10pt, labelsep=2.6pt, labelwidth=3.2pt,
+  label=\raisebox{0.15ex}{\scalebox{0.7}{$\bullet$}},
+}
+\newenvironment{cvitems}{\begin{itemize}}{\end{itemize}}
+
+% ---------------------------------------------------------- publications ---
+% \cvpub{...} -- dash marker, wrapped lines flush to the margin.
+\newcommand{\cvpub}[1]{\par\addvspace{2.5pt}\noindent\mbox{--}~#1\par}
+
+% \cvlink{url}{label} -- monospaced, underlined, like [DOI] / [arXiv].
+\newcommand{\cvlink}[2]{\href{#1}{\underline{\texttt{\fontsize{7}{8}\selectfont[#2]}}}}
+
+\endinput

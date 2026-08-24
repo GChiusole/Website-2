@@ -1,0 +1,9 @@
+# LaTeX by-products from building cv/cv-gideon-chiusole.tex into this folder.
+# The generated cv-gideon-chiusole.pdf is intentionally NOT ignored: the
+# deploy workflow copies it straight out of the repo.
+*.aux
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz
+*.toc

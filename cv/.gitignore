@@ -1,0 +1,9 @@
+# Nothing should be built in this directory (output goes to ../assets/),
+# but catch strays from ad-hoc pdflatex runs.
+*.aux
+*.fdb_latexmk
+*.fls
+*.out
+*.pdf
+*.synctex.gz
+*.toc
