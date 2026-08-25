@@ -48,6 +48,7 @@ jobs:
             -name '*.png' -o \
             -name '*.gif' -o \
             -name '*.webp' -o \
+            -name '*.svg' -o \
             -name '*.mp4' \
           \) -exec cp {} _site/images/ \;
 

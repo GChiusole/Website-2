@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Contact Information - Gideon R. Chiusole">
+    <link rel="canonical" href="https://www.gideon-chiusole.com/contact.html">
     <title>Contact - Gideon R. Chiusole</title>
     <meta property="og:type" content="website">
     <meta property="og:title" content="Contact - Gideon R. Chiusole">
@@ -15,23 +16,13 @@
     <meta name="twitter:description" content="Contact Information - Gideon R. Chiusole">
     <meta name="twitter:image" content="https://www.gideon-chiusole.com/images/photo.jpg">
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="https://github.com/GChiusole.png?size=32">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://github.com/GChiusole.png?size=16">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://github.com/GChiusole.png?size=180">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>
-        MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']]
-            }
-        };
-    </script>
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="preload" href="css/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/icons.css">
 </head>
 <body>
     <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
@@ -77,7 +68,7 @@
                                     </div>
                                     <p>
                                         <a href="https://www.ma.tum.de/" target="_blank">Technical University of Munich (TUM)</a><br>
-                                        <a href="https://www.cit.tum.de/" target="_blank">School of CIT</a><br>
+                                        <a href="https://www.cit.tum.de/" target="_blank">School of Computation, Information and Technology (CIT)</a><br>
                                         Department of Mathematics<br>
                                         Boltzmannstr. 3<br>
                                         85748 Garching bei München, Germany<br>
@@ -103,15 +94,20 @@
                                         <h3>Campus Location</h3>
                                     </div>
                                     <div class="map-container">
-                                        <iframe 
-                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2064.6984868077275!2d11.6653543109128!3d48.26255524233378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479e72ed95317771%3A0x74bfc08a010fc5b9!2sBoltzmannstra%C3%9Fe%203%2C%2085748%20Garching%20bei%20M%C3%BCnchen!5e1!3m2!1sde!2sde!4v1760476973902!5m2!1sde!2sde" 
-                                            width="100%" 
-                                            height="400" 
-                                            style="border:0; border-radius: 8px;" 
-                                            allowfullscreen="" 
-                                            loading="lazy" 
-                                            referrerpolicy="no-referrer-when-downgrade">
-                                        </iframe>
+                                        <div class="campus-map" id="campusMap">
+                                            <picture class="campus-static">
+                                                <source srcset="images/campus-map.webp" type="image/webp">
+                                                <img src="images/campus-map.png" width="1000" height="926"
+                                                     alt="Map of the TUM Garching research campus: the U-Bahn station Garching-Forschungszentrum, the car parks, and the Department of Mathematics at Boltzmannstra&#223;e 3.">
+                                            </picture>
+                                            <div class="campus-controls" hidden>
+                                                <button type="button" class="layer" data-map="layer" aria-pressed="false" aria-label="Switch to aerial imagery" title="Aerial imagery">AER</button>
+                                                <button type="button" data-map="in" aria-label="Zoom in" title="Zoom in">+</button>
+                                                <button type="button" data-map="out" aria-label="Zoom out" title="Zoom out">&#8722;</button>
+                                                <button type="button" class="reset" data-map="reset" aria-label="Reset the view" title="Reset the view">&#8634;</button>
+                                            </div>
+                                            <p class="campus-credit" id="campusCredit">&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -130,5 +126,7 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <script src="js/campus-map-data.js" defer></script>
+    <script src="js/campus-map.js" defer></script>
 </body>
 </html>

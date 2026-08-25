@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Research and Publications - Gideon R. Chiusole">
+    <link rel="canonical" href="https://www.gideon-chiusole.com/research.html">
     <title>Research - Gideon R. Chiusole</title>
     <meta property="og:type" content="website">
     <meta property="og:title" content="Research - Gideon R. Chiusole">
@@ -15,23 +16,14 @@
     <meta name="twitter:description" content="Research and Publications - Gideon R. Chiusole">
     <meta name="twitter:image" content="https://www.gideon-chiusole.com/images/photo.jpg">
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="https://github.com/GChiusole.png?size=32">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://github.com/GChiusole.png?size=16">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://github.com/GChiusole.png?size=180">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>
-        MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']]
-            }
-        };
-    </script>
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="preload" href="css/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/katex/katex.min.css">
 </head>
 <body>
     <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
@@ -187,61 +179,6 @@
             </div>
         </section>
 
-        <!-- Research Visualizations Section - Hidden for now
-        <section class="research-images">
-            <div class="container">
-                <h2>Research Visualizations</h2>
-                <p class="section-description">Visual representations and computational results from my research work.</p>
-                
-                <div class="images-grid" role="grid" aria-label="Research visualization gallery">
-                    <div class="image-item" role="gridcell">
-                        <div class="image-placeholder" role="img" aria-label="Placeholder for pattern formation dynamics visualization">
-                            <i class="fas fa-chart-line" aria-hidden="true"></i>
-                            <p>Pattern Formation Dynamics</p>
-                        </div>
-                        <div class="image-caption">
-                            <h4>Stochastic Pattern Evolution</h4>
-                            <p>Visualization of pattern formation in stochastic PDEs showing stability and bifurcation behavior.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="image-item" role="gridcell">
-                        <div class="image-placeholder" role="img" aria-label="Placeholder for Gaussian path structures visualization">
-                            <i class="fas fa-project-diagram" aria-hidden="true"></i>
-                            <p>Gaussian Path Structures</p>
-                        </div>
-                        <div class="image-caption">
-                            <h4>Rough Path Realizations</h4>
-                            <p>Sample paths and enhanced trajectories in the context of Gaussian rough path theory.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="image-item" role="gridcell">
-                        <div class="image-placeholder" role="img" aria-label="Placeholder for travelling wave solutions visualization">
-                            <i class="fas fa-wave-square" aria-hidden="true"></i>
-                            <p>Travelling Wave Solutions</p>
-                        </div>
-                        <div class="image-caption">
-                            <h4>Wave Propagation Analysis</h4>
-                            <p>Numerical simulations of travelling wave solutions in singular stochastic systems.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="image-item" role="gridcell">
-                        <div class="image-placeholder" role="img" aria-label="Placeholder for model space geometry visualization">
-                            <i class="fas fa-brain" aria-hidden="true"></i>
-                            <p>Model Space Geometry</p>
-                        </div>
-                        <div class="image-caption">
-                            <h4>Abstract Wiener Spaces</h4>
-                            <p>Geometric representations of model spaces and their algebraic structures.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        -->
-
         <section class="publications">
             <div class="container">
                 <h2>Preprints and Publications</h2>
@@ -354,38 +291,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Ongoing Projects Section - Hidden for now, uncomment when ready to add content
-        <section class="ongoing-projects">
-            <div class="container">
-                <h2>Ongoing Projects</h2>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <h3>[Project Name 1]</h3>
-                          <img src="images/travelling-waves.png" 
-                              data-gif="images/travelling-waves.gif" 
-                              alt="Travelling Waves Visualization" 
-                              class="research-figure">
-                        <div class="project-collaborators">
-                            <strong>Collaborators:</strong> [Institution 1], [Institution 2]
-                        </div>
-                    </div>
-                    <div class="project-card">
-                          <img src="images/stochastic-dynamics.png" 
-                              data-gif="images/stochastic-dynamics.gif" 
-                              alt="Stochastic Dynamics Visualization" 
-                              class="research-figure">
-                        <p>Description of the project goals, methodology, and expected outcomes.</p>
-                        <div class="project-collaborators">
-                            <strong>Collaborators:</strong> [Institution 1], [Institution 2]
-                        </div>
-                    </div>
-                          <img src="images/singular-spdes.png" 
-                              data-gif="images/singular-spdes.gif" 
-                              alt="Singular SPDEs Visualization" 
-                              class="research-figure">
-        </section>
-        -->
 
         <section class="academic-materials">
             <div class="container">
@@ -646,24 +551,18 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <script src="js/katex/katex.min.js" defer></script>
+    <script src="js/katex/auto-render.min.js" defer></script>
     <script>
-        // Handle MathJax rendering in tooltips
-        document.addEventListener('DOMContentLoaded', function() {
-            const seminarNotes = document.querySelectorAll('.seminar-note-hover');
-            
-            seminarNotes.forEach(note => {
-                const tooltip = note.querySelector('.tooltip');
-                if (tooltip) {
-                    let isProcessed = false;
-                    
-                    note.addEventListener('mouseenter', function() {
-                        if (!isProcessed && typeof MathJax !== 'undefined') {
-                            MathJax.typesetPromise([tooltip]).then(() => {
-                                isProcessed = true;
-                            });
-                        }
-                    });
-                }
+        document.addEventListener('DOMContentLoaded', function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '\\[', right: '\\]', display: true },
+                    { left: '$', right: '$', display: false },
+                    { left: '\\(', right: '\\)', display: false }
+                ],
+                throwOnError: false
             });
         });
     </script>

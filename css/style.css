@@ -2394,6 +2394,40 @@ h3 {
     margin-bottom: 30px;
 }
 
+/* Static campus map -- replaces the Google Maps embed, so the contact page
+   makes no third-party requests and sets no cookies. Image is a self-hosted
+   OpenStreetMap render; attribution is required by the ODbL. */
+/* Static fallback: shown when the map script has not (or cannot) run.
+   js/campus-map.js removes it once the interactive map is in place. */
+.campus-static,
+.campus-static img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.map-caption {
+    margin-top: 10px;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #64748b;
+}
+
+.map-caption a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.map-caption a:hover {
+    color: #2563eb;
+}
+
+.map-attribution {
+    font-size: 0.8125rem;
+    color: #94a3b8;
+}
+
 .map-placeholder {
     background-color: #e5e7eb;
     height: 300px;
@@ -3412,3 +3446,136 @@ h3 {
         padding: 40px 0 20px;
     }
 }
+
+/* ===== Interactive campus map =====================================
+   Vector geometry: OpenStreetMap contributors (ODbL).
+   Aerial imagery:  Bayerische Vermessungsverwaltung (CC BY 4.0).
+   Both are self-hosted -- no third-party requests, no cookies. */
+.campus-map {
+    position: relative;
+    aspect-ratio: 1000 / 926;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #eef1ea;
+}
+
+.campus-map svg { display: block; width: 100%; height: 100%; touch-action: pan-y; cursor: grab; }
+.campus-map svg.is-dragging { cursor: grabbing; }
+
+.campus-static, .campus-static img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* ---- vector layer ---- */
+#campusSvg path        { vector-effect: non-scaling-stroke; }
+#campusSvg .bg         { fill: #eef1ea; }
+#campusSvg .grass path { fill: #dcebcd; stroke: none; }
+#campusSvg .wood  path { fill: #c8dfb4; stroke: none; }
+#campusSvg .pitch path { fill: #d3e8bd; stroke: none; }
+#campusSvg .water path { fill: #a9d3ef; stroke: none; }
+#campusSvg .stream path{ fill: none; stroke: #a9d3ef; stroke-width: 2.2; stroke-linecap: round; }
+#campusSvg .parking path  { fill: #efe7d2; stroke: #e0d4b4; stroke-width: .7; }
+#campusSvg .buildings path{ fill: #e3ded6; stroke: #cbc5ba; stroke-width: .8; }
+/* Inner rings of multipolygon buildings (courtyards) are not consistently
+   wound in OSM, so 'nonzero' leaves most of them filled. */
+#campusSvg .buildings, #campusSvg .grass, #campusSvg .wood,
+#campusSvg .pitch, #campusSvg .water, #campusSvg .parking { fill-rule: evenodd; }
+#campusSvg .road-case path{ fill: none; stroke: #cdcec7; stroke-width: 7.5; stroke-linejoin: round; stroke-linecap: round; }
+#campusSvg .service path  { fill: none; stroke: #fefefd; stroke-width: 2.6; stroke-linecap: round; }
+#campusSvg .road path     { fill: none; stroke: #ffffff; stroke-width: 5;   stroke-linecap: round; }
+#campusSvg .major path    { fill: none; stroke: #fdf3bf; stroke-width: 6.5; stroke-linecap: round; }
+#campusSvg .foot path     { fill: none; stroke: #a79f93; stroke-width: 1.1; stroke-dasharray: 3 2.5; stroke-linecap: round; }
+#campusSvg .subway path   { fill: none; stroke: #1e3a8a; stroke-width: 2.4; stroke-dasharray: 9 6; opacity: .5; }
+#campusSvg .mi path       { fill: #2563eb; fill-opacity: .26; stroke: #2563eb; stroke-width: 1.8; }
+
+/* fine detail -- faded in as you zoom, so the overview stays readable */
+#campusSvg .hedge path { fill: none; stroke: #9cbf85; stroke-width: 1.6; stroke-linecap: round; }
+#campusSvg .wall  path { fill: none; stroke: #b3ada2; stroke-width: 1.4; stroke-linecap: round; }
+#campusSvg .trees circle { fill: #7fae63; opacity: .75; }
+#campusSvg .bikes circle { fill: #6b7f99; opacity: .8; }
+#campusSvg .entrances .main  circle { fill: #b91c1c; opacity: .85; }
+#campusSvg .entrances .other circle { fill: #8a8577; opacity: .7; }
+#campusSvg .trees, #campusSvg .hedge, #campusSvg .wall,
+#campusSvg .bikes, #campusSvg .entrances { opacity: 0; transition: opacity .25s ease; pointer-events: none; }
+#campusSvg.z-mid  .trees, #campusSvg.z-mid  .hedge, #campusSvg.z-mid .wall { opacity: 1; }
+#campusSvg.z-near .bikes, #campusSvg.z-near .entrances { opacity: 1; }
+#campusSvg.is-aerial .trees, #campusSvg.is-aerial .hedge,
+#campusSvg.is-aerial .wall, #campusSvg.is-aerial .bikes { opacity: 0; }
+
+/* building-section (Gebaeudeteil) numbers on the MI complex */
+#campusSvg .gtl text { fill: #1e40af; font-size: 10px; font-weight: 700; }
+#campusSvg .gtl.gtnamed text { fill: #3730a3; font-size: 8.5px; font-weight: 600; }
+#campusSvg .gtl { opacity: 0; transition: opacity .25s ease; }
+#campusSvg.z-near .gtl { opacity: 1; }
+#campusSvg.is-aerial .gtl text { fill: #ffffff; stroke: #0f172a; stroke-width: 3px; }
+
+/* surrounding institutes -- orientation labels */
+#campusSvg .ilabel text { fill: #5b6472; font-size: 8.6px; font-weight: 600; stroke-width: 2.8px; }
+#campusSvg .ilabel { opacity: 0; transition: opacity .25s ease; }
+#campusSvg.z-far .ilabel, #campusSvg.z-mid .ilabel { opacity: 1; }
+#campusSvg.z-near .ilabel { opacity: 0; }
+#campusSvg.is-aerial .ilabel text { fill: #f1f5f9; stroke: #0f172a; stroke-width: 3.2px; }
+
+/* building name */
+#campusSvg .blabel text { fill: #334155; font-size: 11px; font-weight: 700; }
+#campusSvg .blabel text + text { font-size: 9.5px; font-weight: 600; fill: #475569; }
+#campusSvg.is-aerial .blabel text { fill: #fff; stroke: #0f172a; stroke-width: 3.2px; }
+#campusSvg.is-aerial .station .slabel,
+#campusSvg.is-aerial .plab .pname,
+#campusSvg.is-aerial .office .olabel { fill: #fff; stroke: #0f172a; stroke-width: 3.4px; }
+
+/* ---- aerial layer ---- */
+#campusSvg.is-aerial #vectorLayer { display: none; }
+#campusSvg.is-aerial .mi path     { fill-opacity: 0; stroke: #38bdf8; stroke-width: 2.4; }
+
+/* ---- markers (js holds these at constant screen size) ---- */
+#campusSvg .mk text { font-family: 'Inter', system-ui, sans-serif; text-anchor: middle; paint-order: stroke; stroke: #fff; stroke-width: 3.6px; stroke-linejoin: round; }
+#campusSvg .ent-u circle  { fill: #1e3a8a; opacity: .65; }   /* U-Bahn entrances */
+#campusSvg .station .halo { fill: #1e3a8a; opacity: .16; }
+#campusSvg .station .dot  { fill: #1e3a8a; }
+#campusSvg .station .uname { fill: #fff; stroke: none; font-size: 12px; font-weight: 700; }
+#campusSvg .station .slabel{ fill: #16307a; font-size: 12px; font-weight: 600; }
+#campusSvg .plab circle   { fill: #2f6fb3; opacity: .92; }
+#campusSvg .plab .pmark   { fill: #fff; stroke: none; font-size: 11px; font-weight: 700; }
+#campusSvg .plab .pname   { fill: #3f4a5f; font-size: 10.5px; font-weight: 600; }
+#campusSvg .plab.free circle { fill: #15803d; }
+#campusSvg .plab.paid circle { fill: #b45309; }
+#campusSvg .office .ohalo { fill: #dc2626; opacity: .16; }
+#campusSvg .office .opin  { fill: #dc2626; }
+#campusSvg .office .odot  { fill: #fff; }
+#campusSvg .office .olabel{ fill: #b91c1c; font-size: 12.5px; font-weight: 700; }
+
+/* zoom-dependent detail */
+#campusSvg .foot path { opacity: 0; transition: opacity .2s ease; }
+#campusSvg.z-mid .foot path    { opacity: .8; }
+#campusSvg.is-aerial .foot path{ opacity: 0; }
+
+
+/* ---- controls ---- */
+.campus-controls { position: absolute; bottom: 10px; right: 10px; display: flex; flex-direction: column; gap: 6px; }
+
+.campus-controls button {
+    width: 34px; height: 34px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; font-weight: 600; line-height: 1;
+    color: #334155; background: rgba(255,255,255,.95);
+    border: 1px solid #cbd5e1; border-radius: 7px;
+    cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,.12);
+    transition: background .15s ease, color .15s ease;
+}
+
+.campus-controls button:hover { background: #fff; color: #2563eb; }
+.campus-controls button:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }
+.campus-controls button.reset { font-size: 13px; }
+.campus-controls button.layer { font-size: 10px; font-weight: 700; letter-spacing: .02em; }
+.campus-controls button.layer[aria-pressed="true"] { background: #2563eb; border-color: #2563eb; color: #fff; }
+
+.campus-credit {
+    position: absolute; left: 8px; bottom: 8px;
+    margin: 0; padding: 3px 7px;
+    font-size: .6875rem; line-height: 1.4; color: #52606d;
+    background: rgba(255,255,255,.82); border-radius: 5px;
+    pointer-events: auto;
+}
+
+.campus-credit a { color: inherit; text-decoration: underline; }
+

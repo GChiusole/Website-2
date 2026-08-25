@@ -22,6 +22,19 @@ Thumbs.db
 logs
 *.log
 
+# ffmpeg two-pass encoding artifacts (see scripts/convert_to_mp4.py)
+ffmpeg2pass*
+*.mbtree
+
+# Python virtualenv -- .venv self-ignores via its own .gitignore, but only
+# when created by the venv module; be explicit so 'git add .' is always safe.
+.venv/
+venv/
+ENV/
+
+# GitHub Pages build output (produced by .github/workflows/deploy.yml)
+_site/
+
 # Runtime data
 pids
 *.pid
