@@ -308,9 +308,9 @@ Boltzmannstrasse 3 with its numbered building sections.</desc>
         '<circle class="halo" r="17"/><circle class="dot" r="10"/><text class="uname" y="5">U</text>'
         '<text class="slabel" y="30">Garching-</text><text class="slabel" y="43">Forschungszentrum</text>')}
 {marker("plab free", round(p_free[0],1), round(p_free[1],1),
-        '<circle r="10"/><text class="pmark" y="4">P</text><text class="pname" y="24">Free parking</text>')}
+        '<circle r="10"/><text class="pmark" y="4">P</text><text class="pname" y="24">Parking</text>')}
 {marker("plab paid", round(p_paid[0],1), round(p_paid[1],1),
-        '<circle r="10"/><text class="pmark" y="4">P</text><text class="pname" y="24">Paid parking</text>')}
+        '<circle r="10"/><text class="pmark" y="4">P</text><text class="pname" y="24">Park & Ride</text>')}
 {marker("blabel", bx, by,
         '<text y="0">TUM School of CIT</text><text y="13">Computer Science &amp; Mathematics</text>')}
 {gt_s}
