@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
 
-        const openMenu = () => {
+        const openMenu = (viaKeyboard) => {
             if (navMenu.classList.contains('active')) {
                 return;
             }
@@ -36,7 +36,11 @@ document.addEventListener('DOMContentLoaded', function() {
             navToggle.setAttribute('aria-expanded', 'true');
             document.body.classList.add('menu-open');
             navOverlay.classList.add('active');
-            focusFirstLink();
+            // Only pull focus into the panel for keyboard users; doing it for a
+            // tap would highlight the first row as if it were selected.
+            if (viaKeyboard) {
+                focusFirstLink();
+            }
         };
 
         const closeMenu = () => {
@@ -51,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         // Toggle menu function
-        function toggleMenu(e) {
+        function toggleMenu(e, viaKeyboard) {
             if (e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -59,18 +63,20 @@ document.addEventListener('DOMContentLoaded', function() {
             if (navMenu.classList.contains('active')) {
                 closeMenu();
             } else {
-                openMenu();
+                openMenu(viaKeyboard);
             }
         }
         
         // Click handler
-        navToggle.addEventListener('click', toggleMenu, false);
+        navToggle.addEventListener('click', function(e) {
+            toggleMenu(e, false);
+        }, false);
         
         // Keyboard handler for hamburger button
         navToggle.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                toggleMenu();
+                toggleMenu(null, true);
             }
             if (e.key === 'Escape') {
                 closeMenu();
@@ -112,6 +118,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         navOverlay.addEventListener('click', closeMenu);
+
+        // Rotating to landscape can cross the breakpoint that hides the panel;
+        // without this the body would stay scroll-locked.
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                closeMenu();
+            }
+        });
     }
 
     // Navbar scroll effect

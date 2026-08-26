@@ -17,7 +17,20 @@
     var MIN_W = 40;                       // deepest zoom: ~45 m across
     // Framed to show every orientation label at once; the office is still
     // unmistakable from the red pin and the highlighted building.
-    var START = { x: 62, y: 53, w: 890, h: 890 * BASE_H / BASE_W };
+    var START_WIDE = { x: 62, y: 53, w: 890 };
+    // Labels are held at a constant pixel size, so on a phone-width box the
+    // wide frame packs them on top of each other. This one drops the outer
+    // campus and keeps the office, the U-Bahn station and both car parks,
+    // which spreads the remaining labels far enough apart to read.
+    var START_NARROW = { x: 200, y: 340, w: 600 };
+    var NARROW_PX = 420;                  // rendered map width, not viewport
+
+    function startView(px) {
+        var s = (px && px < NARROW_PX) ? START_NARROW : START_WIDE;
+        return { x: s.x, y: s.y, w: s.w, h: s.w * BASE_H / BASE_W };
+    }
+
+    var START = startView(0);
 
     // Geometry arrives via js/campus-map-data.js (a plain script, so this works
     // over file:// too). If that is missing for any reason the static image
@@ -42,8 +55,25 @@
             return { el: el, x: m ? +m[1] : 0, y: m ? +m[2] : 0 };
         });
 
+        START = startView(svg.getBoundingClientRect().width);
         var view = { x: START.x, y: START.y, w: START.w, h: START.h };
         apply();
+
+        // The frame is chosen from the rendered width, so a rotation or a
+        // resize that crosses NARROW_PX needs a new one -- but only while the
+        // map is still where it started, so it never yanks the view out from
+        // under someone who has panned or zoomed.
+        function reframe() {
+            var next = startView(svg.getBoundingClientRect().width);
+            if (next.w === START.w) { return; }
+            var untouched = view.x === START.x && view.y === START.y && view.w === START.w;
+            START = next;
+            if (untouched) {
+                view = { x: START.x, y: START.y, w: START.w, h: START.h };
+                apply();
+            }
+        }
+        window.addEventListener('resize', reframe);
         if (window.ResizeObserver) { new ResizeObserver(apply).observe(svg); }
         else { window.addEventListener('resize', apply); }
 

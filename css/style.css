@@ -12,12 +12,12 @@
 
 /* ===== ACCESSIBILITY STYLES ===== */
 /* Enhanced focus indicators for better accessibility */
-a:focus,
-button:focus,
-input:focus,
-textarea:focus,
-select:focus,
-[tabindex]:focus {
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
     outline: 3px solid #2563eb;
     outline-offset: 2px;
     border-radius: 3px;
@@ -36,20 +36,20 @@ p a, li a, .hero-description a {
 }
 
 /* Better focus for navigation links */
-.nav-link:focus {
+.nav-link:focus-visible {
     background-color: rgba(37, 99, 235, 0.1);
     outline: 2px solid #2563eb;
     outline-offset: 4px;
 }
 
 /* Improved button focus */
-.btn:focus {
+.btn:focus-visible {
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.5);
     outline: none;
 }
 
 /* Social links focus */
-.social-links a:focus {
+.social-links a:focus-visible {
     transform: scale(1.1);
     outline: 2px solid #2563eb;
     outline-offset: 3px;
@@ -246,25 +246,35 @@ h3[id],
 .nav-toggle {
     display: none;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: none;
+    border: 0;
+    -webkit-appearance: none;
+    appearance: none;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .bar {
-    width: 25px;
-    height: 3px;
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
     background-color: #1f2937;
-    margin: 3px 0;
-    transition: 0.3s;
+    transition: transform 0.3s ease, opacity 0.2s ease;
 }
 
 .nav-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(15, 23, 42, 0.65);
-    backdrop-filter: blur(6px);
+    background: rgba(15, 23, 42, 0.35);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
     z-index: 900;
 }
 
@@ -1671,6 +1681,14 @@ h3 {
     margin-bottom: 10px;
 }
 
+#skills .cv-item {
+    margin-bottom: 18px;
+}
+
+#skills .cv-item:last-child {
+    margin-bottom: 0;
+}
+
 .cv-date {
     color: #2563eb;
     font-weight: 600;
@@ -1736,37 +1754,35 @@ h3 {
     margin-bottom: 8px;
 }
 
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-}
-
-.skill-category {
-    background-color: #f8fafc;
-    padding: 25px;
-    border-radius: 12px;
-}
-
-.skill-category h3 {
+/* Row label in the left-hand column, styled like .cv-date so the closing
+   section keeps the same two-column rhythm as the rest of the CV. */
+.cv-label {
     color: #2563eb;
-    margin-bottom: 15px;
-    text-align: left;
+    font-weight: 600;
+    font-size: 0.95rem;
+    /* centres the label against the first row of tags beside it */
+    padding-top: 5px;
 }
 
-.skill-category ul {
+.cv-tags {
     list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+    margin: 0;
 }
 
-.skill-category li {
-    padding: 8px 0;
-    color: #4b5563;
-    border-bottom: 1px solid #e5e7eb;
+.cv-tags li {
+    padding: 6px 14px;
+    background-color: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    color: #334155;
+    font-size: 0.9rem;
+    line-height: 1.4;
 }
 
-.skill-category li:last-child {
-    border-bottom: none;
-}
 
 /* ===== ACADEMIC MATERIALS SECTION ===== */
 .academic-materials {
@@ -2571,79 +2587,113 @@ h3 {
         padding: 8px 0;
     }
 
+    .nav-container {
+        padding: 0 16px;
+    }
+
     .nav-brand a {
         font-size: 18px;
     }
 
+    /* Mobile menu: a compact card that drops out of the navbar, sized to its
+       five links. `top: 100%` pins it to the navbar's lower edge, so it keeps
+       following it when .scrolled shrinks the bar. */
     .nav-menu {
-        position: fixed;
-        inset: 0;
-        top: 0;
+        position: absolute;
+        top: 100%;
+        right: 16px;
+        left: auto;
+        width: max-content;
+        min-width: 200px;
+        max-width: calc(100vw - 32px);
         flex-direction: column;
-        background: rgba(15, 23, 42, 0.96);
-        backdrop-filter: blur(12px);
-        width: 100%;
-        height: 100vh;
-        text-align: left;
-        transition: transform 0.35s ease;
-        padding: 110px 32px 48px;
+        align-items: stretch;
+        gap: 0;
+        margin-top: 8px;
+        padding: 6px;
+        background-color: #ffffff;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-radius: 14px;
+        box-shadow: 0 12px 32px rgba(15, 23, 42, 0.16);
+        transform-origin: top right;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-6px) scale(0.97);
+        pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
         z-index: 1000;
-        gap: 10px;
-        transform: translateY(-100%);
     }
 
     .nav-menu.active {
-        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
     }
 
+    /* .nav-link sets height:100% for the desktop bar; that would stretch each
+       row to the panel height here. */
     .nav-menu a {
-        padding: 12px 0;
-        display: block;
-        min-height: auto;
-        line-height: 1.4;
-        font-size: 1.05rem;
-        color: #e2e8f0;
-        border-bottom: 1px solid rgba(248, 250, 252, 0.15);
+        display: flex;
+        align-items: center;
+        height: auto;
+        min-height: 44px;
         width: 100%;
+        padding: 0 16px;
+        border-radius: 8px;
+        line-height: 1.4;
+        font-size: 1rem;
+        color: #374151;
+        border-bottom: none;
+        white-space: nowrap;
     }
 
-    .nav-menu a:last-child {
-        border-bottom: none;
+    .nav-menu a + a {
+        margin-top: 2px;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a:active {
+        background-color: #f3f4f6;
+        color: #2563eb;
     }
 
     .nav-menu .nav-link.active {
-        color: #93c5fd;
+        color: #2563eb;
+        background-color: #eff6ff;
+        font-weight: 600;
+    }
+
+    /* The desktop underline would sit outside the row's rounded background. */
+    .nav-menu .nav-link.active::after {
+        display: none;
     }
 
     .nav-toggle {
         display: flex;
-        padding: 6px;
-        border-radius: 4px;
-        transition: background-color 0.3s ease;
+        border-radius: 8px;
+        transition: background-color 0.2s ease;
         position: relative;
         z-index: 1201;
+        margin-right: -10px;
     }
 
-    .nav-toggle:hover {
-        background-color: rgba(0, 0, 0, 0.05);
-    }
-
-    .bar {
-        width: 22px;
-        height: 2px;
-        transition: all 0.3s ease;
+    .nav-toggle:hover,
+    .nav-toggle.active {
+        background-color: rgba(15, 23, 42, 0.06);
     }
 
     .nav-toggle.active .bar:nth-child(2) {
         opacity: 0;
     }
 
+    /* 7px = bar height (2) + gap (5), the distance to the middle bar. */
     .nav-toggle.active .bar:nth-child(1) {
-        transform: translateY(9px) rotate(45deg);
+        transform: translateY(7px) rotate(45deg);
     }
 
     .nav-toggle.active .bar:nth-child(3) {
-        transform: translateY(-9px) rotate(-45deg);
+        transform: translateY(-7px) rotate(-45deg);
     }
 
     .hero {
@@ -2694,16 +2744,49 @@ h3 {
     }
 
     .social-links {
-        gap: 10px;
+        gap: clamp(4px, 1.5vw, 10px);
         margin-top: 12px;
         justify-content: center;
         flex-wrap: wrap;
     }
 
+    /* Sized off the viewport so all seven stay on one row down to 320px.
+       The base rule's min-width/min-height would otherwise pin them at 44px. */
     .social-links a {
-        width: 42px;
-        height: 42px;
-        font-size: 0.95rem;
+        width: clamp(36px, 10vw, 44px);
+        height: clamp(36px, 10vw, 44px);
+        min-width: 0;
+        min-height: 0;
+        font-size: 0.9rem;
+    }
+
+    /* Below ~345px the seven icons cannot share a row at a 36px touch target,
+       so cap the row at four and let the last three centre underneath --
+       a deliberate 4+3 instead of a stranded single icon. */
+    @media (max-width: 344px) {
+        .social-links {
+            max-width: 176px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    /* Justified text at phone widths needs hyphenation, or short lines open
+       up into rivers of white space. */
+    .hero-description,
+    .page-header p,
+    .cv-details,
+    .abstract,
+    .publication-abstract,
+    .expanded-explanation p,
+    .expanded-description p,
+    .project-card p,
+    .course-description,
+    .material-description,
+    .contact-note {
+        hyphens: auto;
+        -webkit-hyphens: auto;
+        overflow-wrap: break-word;
     }
 
     .scroll-to-top {
@@ -2759,10 +2842,13 @@ h3 {
         position: relative;
     }
 
-    .cv-date {
+    .cv-date,
+    .cv-label {
         margin-top: 0;
         font-size: 0.85rem;
-        display: inline-block;
+        /* grid items stretch by default, which blew the pill out to full
+           width; justify-self keeps it hugging its text. */
+        justify-self: start;
         background-color: #e0f2fe;
         color: #0369a1;
         padding: 4px 12px;
@@ -2893,13 +2979,13 @@ h3 {
         line-height: 1.5;
     }
 
-    .skills-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+    #skills .cv-item {
+        margin-bottom: 20px;
     }
 
-    .skill-category {
-        padding: 20px;
+    .cv-tags li {
+        font-size: 0.85rem;
+        padding: 5px 12px;
     }
 }
 
@@ -3004,14 +3090,11 @@ h3 {
 
     .social-links {
         justify-content: center;
-        gap: 10px;
         margin-top: 10px;
     }
 
     .social-links a {
-        width: 38px;
-        height: 38px;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 
     .research-card-content {
@@ -3299,9 +3382,7 @@ h3 {
         }
 
         .social-links a {
-            width: 40px;
-            height: 40px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
 
         .hero-buttons {
@@ -3310,10 +3391,6 @@ h3 {
 
         .contact-item {
             padding: 20px;
-        }
-
-        .skill-category {
-            padding: 16px;
         }
     }
 
@@ -3579,3 +3656,17 @@ h3 {
 
 .campus-credit a { color: inherit; text-decoration: underline; }
 
+/* Phone widths: the map box shrinks but js holds every label at a constant
+   pixel size, so the 17 orientation labels collide with -- and overrun -- the
+   three that carry the answer. Keep the office, the station and the building. */
+@media (max-width: 768px) {
+    #campusSvg .ilabel,
+    #campusSvg .plab .pname {
+        display: none;
+    }
+
+    #campusSvg .blabel text { font-size: 9.5px; }
+    #campusSvg .blabel text + text { font-size: 8.5px; }
+    #campusSvg .office .olabel { font-size: 10px; }
+    #campusSvg .station .slabel { font-size: 10.5px; }
+}
