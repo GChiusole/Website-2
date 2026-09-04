@@ -541,6 +541,11 @@ function expandContentSection(section) {
     const clearInlineHeight = (event) => {
         if (event.propertyName === 'max-height') {
             section.style.maxHeight = '';
+            // Only reveal overflow once the height animation has actually
+            // finished, so a late-arriving video/font size (common on a
+            // cold cache) gets clipped instead of spilling into the
+            // content below while the box is still animating open.
+            section.style.overflow = 'visible';
             section.removeEventListener('transitionend', clearInlineHeight);
         }
     };
@@ -554,6 +559,9 @@ function collapseContentSection(section) {
     }
 
     section.style.maxHeight = section.scrollHeight + 'px';
+    // Clip again before shrinking, otherwise the still-visible overflow
+    // from the expanded state would let content stick out during collapse.
+    section.style.overflow = 'hidden';
 
     requestAnimationFrame(() => {
         section.classList.remove('active');
@@ -563,6 +571,7 @@ function collapseContentSection(section) {
     const clearInlineHeight = (event) => {
         if (event.propertyName === 'max-height') {
             section.style.maxHeight = '';
+            section.style.overflow = '';
             section.removeEventListener('transitionend', clearInlineHeight);
         }
     };

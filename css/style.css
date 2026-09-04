@@ -882,7 +882,6 @@ h3 {
 
 .expanded-content.active {
     max-height: none;
-    overflow: visible;
     opacity: 1;
     margin-top: 40px;
     margin-bottom: 40px;
@@ -982,6 +981,10 @@ h3 {
     overflow: hidden;
     border: 1px solid #e5e7eb;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    /* Safari/WebKit fails to composite a <video> clipped by an
+       overflow:hidden + border-radius ancestor, rendering it blank.
+       Forcing the mask-image render path avoids that broken clip path. */
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
 
 .expanded-figure-fullwidth {
